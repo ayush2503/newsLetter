@@ -3,6 +3,29 @@ import { ADMIN_DETAILS, IS_ADMIN_AUTHENTICATED } from "../../../Types/AdminType/
 import { auth } from "../../../../Config/firebase";
 
 // const auth = getAuth();
+export const check=()=>dispatch=>{
+    const user = auth.currentUser;
+    if(user){
+        dispatch({
+            type:ADMIN_DETAILS,
+            userDetails:user
+          })
+          dispatch({
+            type:IS_ADMIN_AUTHENTICATED,
+            ifAuthenticated:true
+          })
+    }
+    else{
+        dispatch({
+            type:ADMIN_DETAILS,
+            userDetails:{}
+          })
+          dispatch({
+            type:IS_ADMIN_AUTHENTICATED,
+            ifAuthenticated:false
+          })
+    }
+}
 export const loginAction=()=>dispatch=>{
     console.log("here")
     // createUserWithEmailAndPassword(auth, "admin1234@gmail.com", "admin)(*&")
