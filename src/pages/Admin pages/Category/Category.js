@@ -19,10 +19,14 @@ import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Paragraph } from '../../../Components/Typography';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { deleteCategory, fetchCategory } from '../../../Store/Action/AdminActions/SectionActions/sectionAction';
+import Loader from '../../../Components/Loader/Loader';
 const CardHeader = styled(Box)(() => ({
   display: 'flex',
-  paddingLeft: '24px',
-  paddingRight: '24px',
+  paddingLeft: '20px',
+  paddingRight: '20px',
   marginBottom: '12px',
   alignItems: 'center',
   justifyContent: 'space-between',
@@ -39,17 +43,18 @@ const ProductTable = styled(Table)(() => ({
   whiteSpace: 'pre',
   '& small': {
     width: 50,
-    height: 15,
+    height: 10,
     borderRadius: 500,
     boxShadow: '0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.24)',
   },
   '& td': { borderBottom: 'none' },
   '& td:first-of-type': { paddingLeft: '16px !important' },
+
 }));
 
 const Small = styled('small')(({ bgcolor }) => ({
   width: 50,
-  height: 15,
+  height: 10,
   color: '#fff',
   padding: '2px 8px',
   borderRadius: '4px',
@@ -63,9 +68,24 @@ const CategoryTable = () => {
   const bgError = "#FF3D57";
   const bgPrimary = '#1976d2';
   const bgSecondary = '#FFAF38';
-
+  const dispatch=useDispatch()
+  useEffect(() => {
+    dispatch(fetchCategory())
+  }, [])
+  const {categories,sectionLoader}=useSelector(
+    state=>state.navSection
+  )
+  if(sectionLoader){
+    return <Loader/>
+  }
+  const deletehandler=(docid)=>{
+    console.log("object");
+      dispatch(deleteCategory(docid))
+  }
   return (
+
     <Card elevation={3} sx={{ pt: '20px', mb: 3 }}>
+      {/* {console.log(categories)} */}
       <CardHeader>
         <Title>Category</Title>
         <div>
@@ -76,7 +96,8 @@ const CategoryTable = () => {
       </CardHeader>
 
       <Box overflow="auto">
-        <ProductTable>
+        <ProductTable size='small'>
+          {/* column name  */}
           <TableHead>
             <TableRow>
               <TableCell sx={{ px: 3 }} colSpan={4}>
@@ -95,12 +116,12 @@ const CategoryTable = () => {
           </TableHead>
 
           <TableBody>
-            {productList.map((product, index) => (
-              <TableRow key={index} hover>
-                <TableCell colSpan={4} align="left" sx={{ px: 0, textTransform: 'capitalize' }}>
-                  <Box display="flex" alignItems="center">
+            {categories?.length>0?categories.map((data, index) => (
+              <TableRow key={index} hover >
+                <TableCell colSpan={4} align="left"  sx={{ px: 0, textTransform: 'capitalize' }}>
+                  <Box display="flex" alignItems="center" sx={{px:0,py:0}}>
                     <p>{index + 1}.</p>
-                    <Paragraph sx={{ m: 0, ml: 4 }}>{product.name}</Paragraph>
+                    <Paragraph sx={{ m: 0, ml: 4 }}>{data.label}</Paragraph>
                   </Box>
                 </TableCell>
 
@@ -121,12 +142,15 @@ const CategoryTable = () => {
                 </TableCell> */}
 
                 <TableCell sx={{ px: 0 }} colSpan={1}>
-                  <IconButton aria-label="delete" size="large">
-                    <DeleteIcon />
+                  <IconButton onClick={()=>deletehandler(data.id)} aria-label="delete" size="medium">
+                    <DeleteIcon  />
                   </IconButton>
                 </TableCell>
               </TableRow>
-            ))}
+            ))
+                :
+                <div>No categories are listed</div>
+          }
           </TableBody>
         </ProductTable>
       </Box>

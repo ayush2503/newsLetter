@@ -1,4 +1,4 @@
-import { Box, Button, Card } from '@mui/material'
+import { Box, Button, Card, InputLabel, MenuItem, Select } from '@mui/material'
 import React, { useState } from 'react'
 import MultipleSelect from '../../../Components/MultiSelect'
 import TextInput from '../../../Components/TextInput'
@@ -26,13 +26,27 @@ function AddArticle() {
             // style={{width:"60vw"}}
             sx={{width:"100%",mb:4}}
         />
-        <MultipleSelect
-            label="Tags"
-            value={personName}
-            handleChange={(val)=>setPersonName(val.target.value)}
-            // style={{width:"60vw"}}
-            sx={{width:"100%",mb:4}}
-        />
+ 
+
+       <div>
+
+          <InputLabel id="demo-simple-select-label">Age</InputLabel>
+            <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                // value={"age"}
+                label="Age"
+                style={{width:"100%"}}
+                // onChange={handleChange}
+            >
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+            </Select>
+       </div>
+            
+
+
         <TextInput
             label="Article Body"
             value={content}

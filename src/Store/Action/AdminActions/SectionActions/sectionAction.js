@@ -1,15 +1,31 @@
 
 import { db } from "../../../../Config/firebase";
-import { collection, addDoc, Timestamp } from "firebase/firestore"; 
+import { collection, addDoc, Timestamp, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore"; 
+import { FETCH_CATEGORIES, FETCH_POLICY, FETCH_SOCIAL_HANDLES, SECTION_LOADER } from "../../../Types/AdminType/sectionTypes";
+import { async } from "@firebase/util";
 
 export const addCategory=(value)=>async (dispatch)=>{
+  dispatch({
+    type:SECTION_LOADER,
+    sectionLoader:true
+  })
     console.log("here")
+    try{
     const docRef = await addDoc(collection(db, "Categories"), {
         label: value,
         createdAt:Timestamp.now(),
         updatedAt:Timestamp.now()
       });
+
       console.log("Document written with ID: ", docRef.id);
+    }
+    catch(e){
+      console.log(e);
+    }
+    dispatch({
+      type:SECTION_LOADER,
+      sectionLoader:false
+    })
 }
 export const addSocialLinks=(value)=>async (dispatch)=>{
     console.log("here")
@@ -20,6 +36,7 @@ export const addSocialLinks=(value)=>async (dispatch)=>{
       });
       console.log("Document written with ID: ", docRef.id);
 }
+
 export const addPrivacyPolicies=({value,data})=>async (dispatch)=>{
     console.log("here")
     const docRef = await addDoc(collection(db, "Privacy Policies"), {
@@ -29,4 +46,167 @@ export const addPrivacyPolicies=({value,data})=>async (dispatch)=>{
         updatedAt:Timestamp.now()
       });
       console.log("Document written with ID: ", docRef.id);
+}
+
+export const fetchPolicy=()=>async (dispatch)=>{
+  dispatch({
+    type:SECTION_LOADER,
+    sectionLoader:true
+  })
+  const fetchedPolicy=[]
+  try{
+    const querySnapshot = await getDocs(collection(db, "Privacy Policies"));
+    // const data=querySnapshot.data()
+    querySnapshot.forEach((doc) => {
+      console.log(doc.data())
+      fetchedPolicy.push({label:doc.data().label,id:doc.id,body:doc.data().body})
+    });
+    console.log(fetchedPolicy)
+    dispatch({
+      type:FETCH_POLICY,
+      policy:fetchedPolicy
+    })
+  }
+  catch(e){
+      console.log(e)
+  }
+  dispatch({
+    type:SECTION_LOADER,
+    sectionLoader:false
+  })
+}
+export const fetchCategory=()=>async (dispatch)=>{
+  dispatch({
+    type:SECTION_LOADER,
+    sectionLoader:true
+  })
+  const category=[]
+  try{
+    const querySnapshot = await getDocs(collection(db, "Categories"));
+    // const data=querySnapshot.data()
+    querySnapshot.forEach((doc) => {
+      console.log(doc.data())
+      category.push({label:doc.data().label,id:doc.id})
+    });
+    console.log(category)
+    dispatch({
+      type:FETCH_CATEGORIES,
+      categories:category
+    })
+  }
+  catch(e){
+      console.log(e)
+  }
+  dispatch({
+    type:SECTION_LOADER,
+    sectionLoader:false
+  })
+}
+export const fetchSocialHandles=()=>async (dispatch)=>{
+  dispatch({
+    type:SECTION_LOADER,
+    sectionLoader:true
+  })
+  const  handles=[]
+  try{
+    const querySnapshot = await getDocs(collection(db, "SocialLinks"));
+    // const data=querySnapshot.data()
+    querySnapshot.forEach((doc) => {
+      console.log(doc.data())
+      handles.push({handle:doc.data().handle,handleLink:doc.data().handleLink,id:doc.id})
+    });
+    console.log(handles)
+    dispatch({
+      type:FETCH_SOCIAL_HANDLES,
+      socialHandles:handles
+    })
+  }
+  catch(e){
+      console.log(e)
+  }
+  dispatch({
+    type:SECTION_LOADER,
+    sectionLoader:false
+  })
+}
+export const updatePrivacyPolicies=(payload)=>async(dispatch)=>{
+  dispatch({
+    type:SECTION_LOADER,
+    sectionLoader:true
+  })
+  try{
+    const dataref= doc(db,"Privacy Policies",payload.id)
+    await updateDoc(dataref, {
+      label: payload.label,
+      body:payload.body,
+      updatedAt:Timestamp.now()
+    });
+    dispatch(fetchPolicy())
+  }
+  catch(e){
+    console.log(e)
+  }
+  dispatch({
+    type:SECTION_LOADER,
+    sectionLoader:false
+  })
+}
+export const updateHandleLinks=(val)=>async(dispatch)=>{
+  dispatch({
+    type:SECTION_LOADER,
+    sectionLoader:true
+  })
+  try{
+    const dataref= doc(db,"SocialLinks",val.docid)
+    await updateDoc(dataref, {
+      handleLink: val.value,
+      updatedAt:Timestamp.now()
+    });
+    dispatch(fetchSocialHandles())
+  }
+  catch(e){
+    console.log(e)
+  }
+  dispatch({
+    type:SECTION_LOADER,
+    sectionLoader:false
+  })
+}
+export const deleteCategory=(docid)=>async (dispatch)=>{
+  console.log(docid)
+  dispatch({
+    type:SECTION_LOADER,
+    sectionLoader:true
+  })
+  try{
+    await deleteDoc(doc(db, "Categories",docid ));
+    // const data=querySnapshot.data()
+   dispatch(fetchCategory())
+  }
+  catch(e){
+      console.log(e)
+  }
+  dispatch({
+    type:SECTION_LOADER,
+    sectionLoader:false
+  })
+}
+export const deletePolicy=(docid)=>async (dispatch)=>{
+  console.log(docid)
+  dispatch({
+    type:SECTION_LOADER,
+    sectionLoader:true
+  })
+  try{
+    await deleteDoc(doc(db, "Privacy Policies",docid ));
+    // const data=querySnapshot.data()
+   dispatch(fetchPolicy())
+  }
+  catch(e){
+      console.log(e)
+  }
+  dispatch({
+    type:SECTION_LOADER,
+    sectionLoader:false
+  })
 }

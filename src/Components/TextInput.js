@@ -13,7 +13,7 @@ function TextInput(props) {
     variant="outlined"
     sx={sx}
     multiline={props.multiline || false}
-    
+    style={{padding:0}}
   />
   )
 }

@@ -24,9 +24,10 @@ const Admin = () => (
         sx={{
           flexGrow: 1,
           py: 8
+          // width=100
         }}
       >
-        <Container maxWidth={false}>
+        <Container maxWidth={false} >
           {/* <Grid
             container
             spacing={3}

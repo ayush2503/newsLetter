@@ -97,7 +97,7 @@ export const DashboardSidebar = (props) => {
         }}
       >
         <div>
-          <Box sx={{ p: 3 }}>
+          <Box sx={{ py:2  }}>
             {/* <NextLink
               href="/"
               passHref
@@ -124,34 +124,11 @@ export const DashboardSidebar = (props) => {
                 cursor: 'pointer',
                 display: 'flex',
                 justifyContent: 'space-between',
-                px: 3,
+                px: 2,
                 py: '11px',
                 borderRadius: 1
               }}
             >
-              {/* <div>
-                <Typography
-                  color="inherit"
-                  variant="subtitle1"
-                >
-                  Acme Inc
-                </Typography>
-                <Typography
-                  color="neutral.400"
-                  variant="body2"
-                >
-                  Your tier
-                  {' '}
-                  : Premium
-                </Typography>
-              </div> */}
-              {/* <SelectorIcon
-                sx={{
-                  color: 'neutral.500',
-                  width: 14,
-                  height: 14
-                }}
-              /> */}
             </Box>
           </Box>
         </div>
@@ -235,7 +212,7 @@ export const DashboardSidebar = (props) => {
           sx: {
             backgroundColor: 'neutral.900',
             color: '#FFFFFF',
-            width: 280
+            width: 230
           }
         }}
         variant="permanent"

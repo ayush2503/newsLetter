@@ -1,8 +1,9 @@
-import { ADMIN_DETAILS, IS_ADMIN_AUTHENTICATED } from "../../Types/AdminType/AuthTypes"
+import { ADMIN_DETAILS, IS_ADMIN_AUTHENTICATED, NAV_LOADING } from "../../Types/AdminType/AuthTypes"
 
 const AdminAuthDetails={
     userDetails:{},
-    isAuthenticated:false
+    isAuthenticated:false,
+    isnavloading:false
 }
 
 export const authDetails=(state=AdminAuthDetails,action)=>{
@@ -11,6 +12,11 @@ export const authDetails=(state=AdminAuthDetails,action)=>{
         return ({
             ...state,
             isAuthenticated:action.ifAuthenticated
+        })
+        case NAV_LOADING:
+        return ({
+            ...state,
+            isnavloading:action.isnavloading
         })
         case ADMIN_DETAILS:
             return ({

@@ -1,10 +1,15 @@
 import {  createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { ADMIN_DETAILS, IS_ADMIN_AUTHENTICATED } from "../../../Types/AdminType/AuthTypes";
+import { ADMIN_DETAILS, IS_ADMIN_AUTHENTICATED, NAV_LOADING } from "../../../Types/AdminType/AuthTypes";
 import { auth } from "../../../../Config/firebase";
 
 // const auth = getAuth();
 export const check=()=>dispatch=>{
     const user = auth.currentUser;
+    dispatch({
+      type:NAV_LOADING,
+      isnavloading:true
+    })
+    console.log("in check")
     if(user){
         dispatch({
             type:ADMIN_DETAILS,
@@ -14,6 +19,7 @@ export const check=()=>dispatch=>{
             type:IS_ADMIN_AUTHENTICATED,
             ifAuthenticated:true
           })
+          
     }
     else{
         dispatch({
@@ -25,6 +31,10 @@ export const check=()=>dispatch=>{
             ifAuthenticated:false
           })
     }
+    dispatch({
+      type:NAV_LOADING,
+      isnavloading:false
+    })
 }
 export const loginAction=()=>dispatch=>{
     console.log("here")

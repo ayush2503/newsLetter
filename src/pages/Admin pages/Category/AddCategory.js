@@ -1,15 +1,23 @@
 import { Box, Button, Card } from '@mui/material'
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import Loader from '../../../Components/Loader/Loader'
 import TextInput from '../../../Components/TextInput'
 import { addCategory } from '../../../Store/Action/AdminActions/SectionActions/sectionAction'
 
 function AddCategory() {
     const [cat, setcat] = useState("")
     const dispatch=useDispatch()
+    const {categories,sectionLoader}=useSelector(
+      state=>state.navSection
+    )
     const addCategoryHandler=()=>{
         console.log(cat)
         dispatch(addCategory(cat))
+        setcat("")
+    }
+    if(sectionLoader){
+      return <Loader/>
     }
   return (
     <Card  elevation={3} sx={{width:"100%",height :"12vmax",pt:'20px',mb:3,px:3,py:3,display:'flex',flexDirection:"column",justifyContent:"space-around"}}>
