@@ -1,6 +1,8 @@
 import {  createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { ADMIN_DETAILS, IS_ADMIN_AUTHENTICATED, NAV_LOADING } from "../../../Types/AdminType/AuthTypes";
 import { auth } from "../../../../Config/firebase";
+import { Navigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 // const auth = getAuth();
 export const check=()=>dispatch=>{
@@ -36,7 +38,7 @@ export const check=()=>dispatch=>{
       isnavloading:false
     })
 }
-export const loginAction=()=>dispatch=>{
+export const loginAction=(navigate)=>dispatch=>{
     console.log("here")
     // createUserWithEmailAndPassword(auth, "admin1234@gmail.com", "admin)(*&")
     // .then((userCredential) => {
@@ -71,7 +73,9 @@ export const loginAction=()=>dispatch=>{
         type:IS_ADMIN_AUTHENTICATED,
         ifAuthenticated:true
       })
-   
+      toast.success("Successfully Logged In !!")
+    navigate("/api/v1/admin/article")
+      
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -91,6 +95,9 @@ export const logoutAction=()=>dispatch=>{
             type:IS_ADMIN_AUTHENTICATED,
             ifAuthenticated:false
           })
+          // console.log("logout action")
+          toast.success("Successfully Logged Out !!")
+         
       }).catch((error) => {
         // An error happened.
       });

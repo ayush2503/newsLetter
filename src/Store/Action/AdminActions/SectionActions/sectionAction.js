@@ -47,6 +47,35 @@ export const addPrivacyPolicies=({value,data})=>async (dispatch)=>{
       });
       console.log("Document written with ID: ", docRef.id);
 }
+export const addArticleAction=(payload)=>async (dispatch)=>{
+    console.log("here")
+    dispatch({
+      type:SECTION_LOADER,
+      sectionLoader:true
+    })
+    try{
+
+      const {heading,subHead,category,body}=payload
+      const docRef = await addDoc(collection(db, "Articles"), {
+          heading ,
+          alternateHeading:subHead,
+          tag:category,
+          body,
+          reviews:[],
+          image:"",
+          createdAt:Timestamp.now(),
+          updatedAt:Timestamp.now()
+        });
+        console.log("Document written with ID: ", docRef.id);
+    }
+    catch(e){
+      console.log(e);
+    }
+      dispatch({
+        type:SECTION_LOADER,
+        sectionLoader:false
+      })
+}
 
 export const fetchPolicy=()=>async (dispatch)=>{
   dispatch({

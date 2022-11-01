@@ -23,14 +23,14 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import PrivacyTipIcon from '@mui/icons-material/PrivacyTip';
 const items = [
   {
-    path: 'category',
-    icon: (<CategoryIcon fontSize="small" color='white' />),
-    title: 'Category'
-  },
-  {
     path: 'article',
     icon: (<ArticleIcon fontSize="small" />),
     title: 'Article'
+  },
+  {
+    path: 'category',
+    icon: (<CategoryIcon fontSize="small" color='white' />),
+    title: 'Category'
   },
   {
     path: 'contacts',

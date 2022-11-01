@@ -1,12 +1,14 @@
 import { Button, Card, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { loginAction } from '../../../Store/Action/AdminActions/AuthActions/AuthActions'
 
 function Login() {
     const [email, setemail] = useState("")
     const [password, setpassword] = useState("")
     const dispatch=useDispatch()
+    const navigate= useNavigate()
 const handleEmailChange=(val)=>{
     setemail(val)
 }
@@ -14,7 +16,9 @@ const handlePassChange=(val)=>{
     setpassword(val)
 }
 const handleLogin=()=>{
-    dispatch(loginAction())
+    dispatch(loginAction(navigate))
+    // navigate("/api/v1/admin/article")
+    
 }
     return (
         <div style={{ width: "100vw", height: "100vh", backgroundColor: "#111827", display: "flex", justifyContent: "center", alignItems: "center" }}>

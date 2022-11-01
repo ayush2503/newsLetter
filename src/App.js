@@ -19,6 +19,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { check } from './Store/Action/AdminActions/AuthActions/AuthActions';
 import Loader from './Components/Loader/Loader';
 import EditPrivacyTerms from './pages/Admin pages/Privacy/editPrivacy';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Protected from './Components/ProtectedRoute';
 // import SocialList from './pages/Admin pages/SocialList/SocialList';
 function App() {
   const { isAuthenticated, isnavloading } = useSelector(state => state.adminAuth)
@@ -28,31 +31,62 @@ function App() {
     // <MiniDrawer/>
     // <div>app</div>
     <ThemeProvider theme={theme}>
-      {console.log("reder")}
+      {/* {console.log("reder")} */}
       <CssBaseline />
       <Routes>
         <Route path={"/"} element={<div>Home</div>}>
 
         </Route>
         {/* <Route path="/login"element={<Login/>} /> */}
-        <Route path="/api/v1/admin" element={!isAuthenticated ? <Login /> : <Admin />} >
-          <Route path="category" element={<CategoryTable />} />
+        <Route path="/api/v1/admin/login" element={<Login />} />
+        <Route path="/api/v1/admin" element={
+          <Protected isLoggedIn={isAuthenticated} >
+            <Admin />
+          </Protected>
+        }
+        // !isAuthenticated ? <Login /> : <Admin />}
+        >
+          <Route path="category" element={<Outlet />}>
 
-          <Route path="category/:add" element={<AddCategory />} />
-          <Route path="article" element={<AddArticle />} />
-          {/* <Route path="article/:add" element={<AddArticle/>}/> */}
-          <Route path="contacts" element={<SocialList />} />
-          <Route path="contacts/:add" element={<AddSocialLinks />} />
-          <Route path="privacy" element={<PrivacyTable />} />
-          <Route path="privacy/edit/:id" element={<EditPrivacyTerms />} />
+            <Route index element={<Protected isLoggedIn={isAuthenticated}><CategoryTable /></Protected>} />
 
-          <Route path="privacy/add" element={<AddPrivacyTerms/>}/>
-          {/* </Route> */}
+            <Route path="add" element={<AddCategory />} />
+          </Route>
+          <Route path="contacts" element={<Outlet />}>
+            <Route index element={<Protected isLoggedIn={isAuthenticated}><SocialList /></Protected>} />
 
+            <Route path="add" element={<AddSocialLinks />} />
+
+          </Route>
+          <Route path="article" element={
+
+            <Protected isLoggedIn={isAuthenticated}>
+              <AddArticle />
+            </Protected>
+          }
+          />
+          <Route path="privacy" element={<Outlet />}>
+            <Route index element={<Protected isLoggedIn={isAuthenticated}><PrivacyTable /></Protected>} />
+
+            <Route path="privacy/edit/:id" element={<EditPrivacyTerms />} />
+            <Route path="add" element={<AddPrivacyTerms />} />
+
+          </Route>
         </Route>
 
       </Routes>
-
+      <ToastContainer
+        position="bottom-center"
+        autoClose={500}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={true}
+        theme="light"
+      />
     </ThemeProvider>
 
   )

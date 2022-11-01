@@ -1,59 +1,17 @@
-import { useContext } from 'react';
-// import Router from 'next/router';
-import PropTypes from 'prop-types';
-import { Box, MenuItem, MenuList, Popover, Typography } from '@mui/material';
+import { Box, MenuItem, MenuList, Popover } from '@mui/material';
 import { logoutAction } from '../../Store/Action/AdminActions/AuthActions/AuthActions';
 import { useDispatch } from 'react-redux';
-// import { AuthContext } from '../contexts/auth-context';
-// import { auth, ENABLE_AUTH } from '../lib/auth';
+import { useNavigate } from 'react-router-dom';
+
 
 export const AccountPopover = (props) => {
   const dispatch=useDispatch()
   const { anchorEl, onClose, open, ...other } = props;
-//   const authContext = useContext(AuthContext);
+const navigate=useNavigate()
 
-//   const handleSignOut = async () => {
-//     onClose?.();
-
-    // Check if authentication with Zalter is enabled
-    // If not enabled, then redirect is not required
-    // if (!ENABLE_AUTH) {
-    //   return;
-    // }
-
-    // Check if auth has been skipped
-    // From sign-in page we may have set "skip-auth" to "true"
-    // If this has been skipped, then redirect to "sign-in" directly
-    // const authSkipped = globalThis.sessionStorage.getItem('skip-auth') === 'true';
-
-    // if (authSkipped) {
-    //   // Cleanup the skip auth state
-    //   globalThis.sessionStorage.removeItem('skip-auth');
-
-    //   // Redirect to sign-in page
-    //   Router
-    //     .push('/sign-in')
-    //     .catch(console.error);
-    //   return;
-    // }
-
-//     try {
-//       // This can be call inside AuthProvider component, but we do it here for simplicity
-//       await auth.signOut();
-
-//       // Update Auth Context state
-//       authContext.signOut();
-
-//       // Redirect to sign-in page
-//       Router
-//         .push('/sign-in')
-//         .catch(console.error);
-//     } catch (err) {
-//       console.error(err);
-//     }
-//   };
   const handleSignOut=()=>{
-    dispatch(logoutAction())
+    dispatch(logoutAction(navigate))
+    navigate("/api/v1/admin")
   }
   return (
     <Popover
@@ -75,7 +33,7 @@ export const AccountPopover = (props) => {
           px: 2
         }}
       >
-        <Typography variant="overline">
+        {/* <Typography variant="overline">
           Account
         </Typography>
         <Typography
@@ -83,7 +41,7 @@ export const AccountPopover = (props) => {
           variant="body2"
         >
           John Doe
-        </Typography>
+        </Typography> */}
       </Box>
       <MenuList
         disablePadding

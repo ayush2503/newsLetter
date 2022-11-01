@@ -3,7 +3,7 @@ import React from 'react'
 
 function TextInput(props) {
     console.log(props);
-  const {label,value,handleChange,sx}=props
+  const {label,value,handleChange,sx,select,selectProps}=props
   return (
     <TextField
     id="outlined-name"
@@ -14,6 +14,8 @@ function TextInput(props) {
     sx={sx}
     multiline={props.multiline || false}
     style={{padding:0}}
+    select={select || false}
+    SelectProps={selectProps || {}}
   />
   )
 }
