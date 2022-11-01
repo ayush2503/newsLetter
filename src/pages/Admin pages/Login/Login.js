@@ -27,6 +27,8 @@ const handleLogin=()=>{
       return  toast.error("Password is required")
     }
     dispatch(loginAction({email,password},navigate))
+    setemail("")
+    setpassword("")
     // navigate("/api/v1/admin/article")
     
 }
