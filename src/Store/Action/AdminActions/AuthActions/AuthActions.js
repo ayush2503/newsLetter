@@ -38,7 +38,7 @@ export const check=()=>dispatch=>{
       isnavloading:false
     })
 }
-export const loginAction=(navigate)=>dispatch=>{
+export const loginAction=(payload,navigate)=>dispatch=>{
     console.log("here")
     // createUserWithEmailAndPassword(auth, "admin1234@gmail.com", "admin)(*&")
     // .then((userCredential) => {
@@ -61,7 +61,8 @@ export const loginAction=(navigate)=>dispatch=>{
     //   // 
     //   console.log("error",errorCode)
     // });
-    signInWithEmailAndPassword(auth, "admin1234@gmail.com","admin)(*&")
+    // signInWithEmailAndPassword(auth, "admin1234@gmail.com","admin)(*&")
+    signInWithEmailAndPassword(auth, payload.email,payload.password)
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
@@ -78,8 +79,10 @@ export const loginAction=(navigate)=>dispatch=>{
       
   })
   .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
+    // const errorCode = error.code;
+    // const errorMessage = error.message;
+    // console.log(errorMessage)
+    toast.error("Invalid Username / Password")
   });
 }
 

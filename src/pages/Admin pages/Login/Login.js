@@ -2,6 +2,7 @@ import { Button, Card, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Navigate, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { loginAction } from '../../../Store/Action/AdminActions/AuthActions/AuthActions'
 
 function Login() {
@@ -16,7 +17,16 @@ const handlePassChange=(val)=>{
     setpassword(val)
 }
 const handleLogin=()=>{
-    dispatch(loginAction(navigate))
+    if(!email && !password)
+     return toast.error("Email and Password are required")
+
+    if(!email){
+      return  toast.error("Email is required")
+    }
+    if(!password){
+      return  toast.error("Password is required")
+    }
+    dispatch(loginAction({email,password},navigate))
     // navigate("/api/v1/admin/article")
     
 }
@@ -38,6 +48,7 @@ const handleLogin=()=>{
                         value={email}
                         style={{ width: "100%",marginBottom:"2vmax" }}
                         onChange={(e)=>handleEmailChange(e.target.value)}
+                        placeholder="abc@gmail.com"
                     />
 
                     <TextField
@@ -47,6 +58,7 @@ const handleLogin=()=>{
                         autoComplete="current-password"
                         style={{ width: "100%" }}
                         value={password}
+                        placeholder="******"
                         onChange={(e)=>handlePassChange(e.target.value)}
                     />
                 </div>
