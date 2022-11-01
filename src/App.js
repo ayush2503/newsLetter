@@ -50,26 +50,26 @@ function App() {
 
             <Route index element={<Protected isLoggedIn={isAuthenticated}><CategoryTable /></Protected>} />
 
-            <Route path="add" element={<AddCategory />} />
+            <Route path="add" element={<Protected isLoggedIn={isAuthenticated}><AddCategory /></Protected>} />
           </Route>
           <Route path="contacts" element={<Outlet />}>
             <Route index element={<Protected isLoggedIn={isAuthenticated}><SocialList /></Protected>} />
 
-            <Route path="add" element={<AddSocialLinks />} />
+            <Route path="add" element={<Protected isLoggedIn={isAuthenticated}><AddSocialLinks /></Protected>} />
 
           </Route>
           <Route path="article" element={
 
             <Protected isLoggedIn={isAuthenticated}>
-              <AddArticle />
+              <Protected isLoggedIn={isAuthenticated}><AddArticle /></Protected>
             </Protected>
           }
           />
           <Route path="privacy" element={<Outlet />}>
             <Route index element={<Protected isLoggedIn={isAuthenticated}><PrivacyTable /></Protected>} />
 
-            <Route path="privacy/edit/:id" element={<EditPrivacyTerms />} />
-            <Route path="add" element={<AddPrivacyTerms />} />
+            <Route path="edit/:id" element={<Protected isLoggedIn={isAuthenticated}><EditPrivacyTerms /></Protected>} />
+            <Route path="add" element={<Protected isLoggedIn={isAuthenticated}><AddPrivacyTerms /></Protected>} />
 
           </Route>
         </Route>

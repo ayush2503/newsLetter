@@ -86,6 +86,7 @@ const toggleHandler=(val,docid)=>{
   //   toggle[index]=!val
   // }
   setisEdit(true)
+  console.log(val);
   setval({value:val,docid:docid})
 } 
 // console.log(object);
@@ -95,7 +96,7 @@ dispatch(updateHandleLinks(val))
 setval("")
 setisEdit(false)
 }
-
+console.log(socialHandles)
 if(sectionLoader){
   return <Loader/>
 }
@@ -112,6 +113,7 @@ if(sectionLoader){
     }
 
     <Card elevation={3} sx={{ pt: '20px', mb: 3 }}>
+      
       <CardHeader>
         <Title>Social account Listed</Title>
         <div>
@@ -168,7 +170,7 @@ if(sectionLoader){
 
                 <TableCell align="center" sx={{ px: 0 ,width:"25%"}}>
                 
-                  <IconButton onClick={()=>toggleHandler(socialHandles.handleLink,data.id)} aria-label="delete" size="small" sx={{mr:1}}>
+                  <IconButton onClick={()=>toggleHandler(data.handleLink,data.id)} aria-label="delete" size="small" sx={{mr:1}}>
                     <EditIcon />
                   </IconButton>
                   {/* <IconButton aria-label="delete" size="small">
