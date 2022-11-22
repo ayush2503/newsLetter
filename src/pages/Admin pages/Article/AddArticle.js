@@ -76,6 +76,12 @@ function AddArticle() {
                     dataList={categories || []}
                     sx={{ mb: 4 }}
                 />
+                
+              
+<Button variant="outlined" component="label">
+  Upload
+  <input hidden accept="image/*" multiple  onChange={(e)=>console.log(e.target.value)}type="file" />
+</Button>
             </div>
             <div style={{ display: 'flex', justifyContent: "center" }}>
                

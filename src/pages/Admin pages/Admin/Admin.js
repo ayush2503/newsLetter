@@ -4,6 +4,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { DashboardLayout } from '../../../Components/DashboardLayout';
 
 const Admin = () => (
+  
 
   <>
     <DashboardLayout>
