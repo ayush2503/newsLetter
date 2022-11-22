@@ -37,7 +37,7 @@ function Home_layout({data}) {
             console.log(temp)
             sethomeElem(temp)
             setHomeCategory(Object.keys(temp))
-            console.log(temp);
+            // console.log(temp);
         }
 
         );
@@ -50,7 +50,7 @@ return(
     <BodyNav item={[elem]} />
       <Box
         sx={{
-          height: "17vmax",
+          minHeight: "17vmax",
           display: "flex",
           // overflow: "auto",
           flexWrap: "nowrap",

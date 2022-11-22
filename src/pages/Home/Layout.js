@@ -20,6 +20,7 @@ function Layout() {
           <Grid item xs={9}>
             {/* <BodyNav item={["Latest", "Popular", "Trending"]} /> */}
             <Box sx={{ py: 2, minHeight: "80vh" }}>
+              
               <Outlet/>
                 {/* <CardBox/> */}
             </Box>

@@ -1,4 +1,5 @@
-import { Box, Button, Card, InputLabel, ListItemText, MenuItem, Select } from '@mui/material'
+import { Box, Button, Card, InputLabel, ListItemText, MenuItem, Select, Typography } from '@mui/material'
+import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -15,6 +16,7 @@ function AddArticle() {
     const [subHead, setSubhead] = useState("")
     const [category, setcategory] = useState("")
     const [body, setBody] = React.useState("");
+    const [img, setImg] = React.useState("");
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(fetchCategory())
@@ -22,13 +24,32 @@ function AddArticle() {
     const { categories, sectionLoader } = useSelector(
         state => state.navSection
     )
-    const handleArticle=()=>{
+    const upload=async (file)=>{
+        const storage = getStorage();
+const storageRef = ref(storage, 'img/'+file.name);
+
+uploadBytes(storageRef, file).then((snapshot) => {
+    console.log('Uploaded a blob or file!',snapshot);
+    getDownloadURL(storageRef)
+    .then((url) => {
+      // Insert url into an <img> tag to "download"
+      console.log(url)
+     setImg(url)
+    })
+  }
+  
+  );
+    }
+    const handleArticle= async ()=>{
         console.log("first")
-            dispatch(addArticleAction({heading,subHead,category,body}))
+        // const image=await upload(img)
+
+            dispatch(addArticleAction({heading,subHead,category,body,img}))
             setHeading("")
             setSubhead("")
             setcategory("")
             setBody("")
+            setImg("")
     }
 
     if (sectionLoader) {
@@ -77,11 +98,15 @@ function AddArticle() {
                     sx={{ mb: 4 }}
                 />
                 
-              
+<Typography>{img.name}</Typography>
 <Button variant="outlined" component="label">
-  Upload
-  <input hidden accept="image/*" multiple  onChange={(e)=>console.log(e.target.value)}type="file" />
+  Upload Image
+  <input hidden accept="image/*" multiple  onChange={(e)=>{
+    setImg(e.target.files[0])
+    upload(e.target.files[0])
+    }}type="file" />
 </Button>
+
             </div>
             <div style={{ display: 'flex', justifyContent: "center" }}>
                

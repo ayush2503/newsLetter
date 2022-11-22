@@ -3,6 +3,7 @@ import { db } from "../../../../Config/firebase";
 import { collection, addDoc, Timestamp, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore"; 
 import { FETCH_CATEGORIES, FETCH_POLICY, FETCH_SOCIAL_HANDLES, SECTION_LOADER } from "../../../Types/AdminType/sectionTypes";
 import { async } from "@firebase/util";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 export const addCategory=(value)=>async (dispatch)=>{
   dispatch({
@@ -47,6 +48,8 @@ export const addPrivacyPolicies=({value,data})=>async (dispatch)=>{
       });
       console.log("Document written with ID: ", docRef.id);
 }
+
+
 export const addArticleAction=(payload)=>async (dispatch)=>{
     console.log("here")
     dispatch({
@@ -55,18 +58,24 @@ export const addArticleAction=(payload)=>async (dispatch)=>{
     })
     try{
 
-      const {heading,subHead,category,body}=payload
+      const {heading,subHead,category,body,img}=payload
+      // const image=await upload(img)
+      
+      // console.log(image)
+     
       const docRef = await addDoc(collection(db, "Articles"), {
           heading ,
           alternateHeading:subHead,
           tag:category,
           body,
           reviews:[],
-          image:"",
+          image:img,
           createdAt:Timestamp.now(),
           updatedAt:Timestamp.now()
         });
         console.log("Document written with ID: ", docRef.id);
+        // const image=upload(img)
+        
     }
     catch(e){
       console.log(e);
@@ -239,3 +248,16 @@ export const deletePolicy=(docid)=>async (dispatch)=>{
     sectionLoader:false
   })
 }
+
+const upload=async (file)=>{
+  const storage = getStorage();
+const storageRef = ref(storage, file.name);
+uploadBytes(storageRef, file).then((snapshot) => {
+console.log('Uploaded a blob or file!',snapshot);
+getDownloadURL(storageRef)
+.then((url) => {
+  // Insert url into an <img> tag to "download"
+  console.log(url)
+  return url
+})
+})}

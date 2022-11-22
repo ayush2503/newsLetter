@@ -28,6 +28,7 @@ import CardBox from "./Components/Cards/CardBox";
 import Home_layout from "./Components/Home_layout/Home_layout";
 import Category_layout from "./Components/Category_Layout/Category_layout";
 import ArticleDetails from "./pages/ArticleDetails/ArticleDetails";
+import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
 // import SocialList from './pages/Admin pages/SocialList/SocialList';
 function App() {
   const { isAuthenticated, isnavloading } = useSelector(
@@ -55,8 +56,8 @@ function App() {
         <Route path={"/"} element={<Layout />}>
           <Route index element={<Home_layout/>} />
           <Route path="about_us" element={<div>about us</div>}/>
-        <Route path="tnc" element={<div>Terms And Condition</div>}/>
-        <Route path="privacy_Policy" element={<div>Privacy Policy</div>}/>
+        <Route path="tnc" element={<div style={{margin:'5vmax'}}>Terms And Condition</div>}/>
+        <Route path="privacy_Policy" element={<PrivacyPolicy/>}/>
         </Route>
         <Route path={"/category"} element={<Layout />}>
           <Route path=":label" element={<Category_layout/>}/>

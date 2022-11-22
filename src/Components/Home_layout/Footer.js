@@ -1,7 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
-
+import InstagramIcon from '@mui/icons-material/Instagram';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 function Footer() {
   return (
     <Box
@@ -20,6 +22,20 @@ function Footer() {
           LOGO
         </Typography>
         <Typography color={"#F3F3F3"}>Follow Us On</Typography>
+        <Box sx={{mt:2}}>
+        <Link to={{ pathname: "https://herewecode.io/" }} target="_blank">
+        <InstagramIcon sx={{color:"white"}}  />
+
+        </Link>
+        <Link to={{ pathname: "https://herewecode.io/" }} target="_blank">
+
+        <FacebookIcon sx={{color:"white",ml:2,mr:2}} />
+        </Link>
+        <Link to={{ pathname: "https://herewecode.io/" }} target="_blank">
+
+        <LocalPhoneIcon sx={{color:"white"}}/>
+        </Link>
+        </Box>
       </Box>
       <Box sx={{ height: "60%", width: "55%", ml: -30 }}>
         <Typography color={"white"}>
@@ -34,12 +50,12 @@ function Footer() {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            width: "45% ",
+            width: "35% ",
           }}
         >
-          <Link to="/about_us" style={{textDecoration:"none"}}>
+          {/* <Link to="/about_us" style={{textDecoration:"none"}}>
             <Typography color={"white"}>About Us</Typography>
-          </Link>
+          </Link> */}
           <Link to="/tnc" style={{textDecoration:"none"}}>
             <Typography color={"white"}>Terms And Conditions</Typography>
           </Link>
