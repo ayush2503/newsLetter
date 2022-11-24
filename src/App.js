@@ -42,20 +42,10 @@ function App() {
       {/* {console.log("reder")} */}
       <CssBaseline />
       <Routes>
-        {/* <Route
-          path={"/"}
-        d  element={
-            <Layout />         
-          }
-        >
-          <Route  path={"/:navCategory"} element={<Outlet />}>
-            <Route index element={<div>Category Index</div>} />
-            <Route path={":type"} element={<div>latest</div>}/>
-          </Route>
-        </Route> */}
+      
         <Route path={"/"} element={<Layout />}>
           <Route index element={<Home_layout/>} />
-          <Route path="about_us" element={<div>about us</div>}/>
+          {/* <Route path="about_us" element={<div>about us</div>}/> */}
         <Route path="tnc" element={<div style={{margin:'5vmax'}}>Terms And Condition</div>}/>
         <Route path="privacy_Policy" element={<PrivacyPolicy/>}/>
         </Route>

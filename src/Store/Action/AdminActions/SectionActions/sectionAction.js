@@ -58,7 +58,7 @@ export const addArticleAction=(payload)=>async (dispatch)=>{
     })
     try{
 
-      const {heading,subHead,category,body,img}=payload
+      const {heading,subHead,category,body,img,isTrending}=payload
       // const image=await upload(img)
       
       // console.log(image)
@@ -70,6 +70,7 @@ export const addArticleAction=(payload)=>async (dispatch)=>{
           body,
           reviews:[],
           image:img,
+          isTrending:isTrending,
           createdAt:Timestamp.now(),
           updatedAt:Timestamp.now()
         });

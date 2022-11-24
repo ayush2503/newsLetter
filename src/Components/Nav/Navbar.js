@@ -9,6 +9,11 @@ import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Button } from "@mui/material";
+import SearchBox from "../SearcBox/SearchBox";
+
+
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -40,7 +45,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    paddingLeft: `calc(1em + ${theme.spacing(1)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("sm")]: {
@@ -53,6 +58,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
+  const [query, setquery] = useState("")
+  const [toggleSearch, settoggleSearch] = useState(false)
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed">
@@ -92,15 +99,9 @@ export default function SearchAppBar() {
             </Link>
           </Box>
           </div>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+          {/* <Button onClick={()=>settoggleSearch(!toggleSearch)} sx={{bgcolor:"white",opacity:0.8}}>Search</Button> */}
+          {/* <SearchBox/> */}
+         
         </Toolbar>
       </AppBar>
     </Box>
