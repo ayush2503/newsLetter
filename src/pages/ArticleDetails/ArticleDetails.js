@@ -34,11 +34,11 @@ if(!data)
         <Typography sx={{fontSize:"0.6vmax"}}>{moment(data?.createdAt?.seconds*1000).format("LL")}</Typography>
         <CardMedia
          component="img"
-         height="400px"
+        //  height="220vmax"
         width={"325"}
          image={data?.image ?data.image:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png"}
          alt=""
-         sx={{mt:2,mb:1}}
+         sx={{mt:2,mb:1,height:{xs:"15vmax", sm:"20vmax"}}}
         />
         <Typography sx={{fontSize:"1.2vmax",fontWeight:500,mt:1.5,mb:2}}>Spread the love</Typography>
         {/* <Typography>{data?.body}</Typography> */}
