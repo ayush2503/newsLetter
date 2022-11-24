@@ -1,50 +1,54 @@
 import * as React from 'react';
+import Popover from '@mui/material/Popover';
+import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import { TextField } from '@mui/material';
 import { Box } from '@mui/system';
-
+import { TextField } from '@mui/material';
+import SearchIcon from "@mui/icons-material/Search";
+import { getSuggestedQuery } from '@testing-library/react';
 export default function SearcBox() {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
+  const [query, setquery] = React.useState("");
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
 
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+const handleSearch=(query)=>{
+
+}
   return (
     <div>
-      <Button
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-        sx={{bgcolor:"white"}}
-      >
-        Dashboard
+      <Button aria-describedby={id} variant="contained" sx={{fontSize:"1.2vmax"}} onClick={handleClick}>
+        Search
       </Button>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
+      <Popover
+        id={id}
         open={open}
+        anchorEl={anchorEl}
         onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
         }}
-        sx={{mt:1.5}}
+        // sx={{height:"6vmax",width:"20vmax",p:"0"}}
       >
-        
-       
-        <MenuItem >
-            <Box>
-                <TextField />
-            </Box>
-        </MenuItem>
-      </Menu>
+        {/* <Box sx={{display:"flex",justifyContent:"space-between",alignItems:"center"}}> */}
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+            <TextField size='small' value={query} sx={{p:"0.5vmax",height:"5vmax",width:"20vmax"}} onChange={(e)=>setquery(e.target.value)} />
+            <div style={{marginLeft:"1vmax",cursor:"pointer"}}  onClick={()=>handleSearch(query)}>
+
+            <SearchIcon />
+            </div>
+        </div>
+        {/* </Box> */}
+      </Popover>
     </div>
   );
 }

@@ -29,6 +29,7 @@ import Home_layout from "./Components/Home_layout/Home_layout";
 import Category_layout from "./Components/Category_Layout/Category_layout";
 import ArticleDetails from "./pages/ArticleDetails/ArticleDetails";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
+import SearchPage from "./pages/SearchPage/SearchPage";
 // import SocialList from './pages/Admin pages/SocialList/SocialList';
 function App() {
   const { isAuthenticated, isnavloading } = useSelector(
@@ -40,7 +41,7 @@ function App() {
     // <div>app</div>
     <ThemeProvider theme={theme}>
       {/* {console.log("reder")} */}
-      <CssBaseline />
+      
       <Routes>
       
         <Route path={"/"} element={<Layout />}>
@@ -48,6 +49,9 @@ function App() {
           {/* <Route path="about_us" element={<div>about us</div>}/> */}
         <Route path="tnc" element={<div style={{margin:'5vmax'}}>Terms And Condition</div>}/>
         <Route path="privacy_Policy" element={<PrivacyPolicy/>}/>
+        <Route path="search"  element={<Outlet/>}>
+            <Route path=":query" element={<SearchPage/>}/>
+          </Route>
         </Route>
         <Route path={"/category"} element={<Layout />}>
           <Route path=":label" element={<Category_layout/>}/>
@@ -56,6 +60,8 @@ function App() {
         <Route path="/404" element={<Layout/>}>
             <Route index element={<div>404 Page not found</div>}/>
         </Route>
+        
+        
       
         {/* <Route path="/login"element={<Login/>} /> */}
         <Route path="/api/v1/admin/login" element={<Login />} />

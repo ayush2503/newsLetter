@@ -9,6 +9,7 @@ import BodyNav from '../Nav/BodyNav'
 function Home_layout({data}) {
     const [homeElem, sethomeElem] = useState({})
     const [HomeCategory,setHomeCategory]=useState([])
+    
     useEffect(() => {
       getDocs(collection(db, "Articles")).then(
           (snapData) => {
@@ -53,9 +54,9 @@ return(
           minHeight: "17vmax",
           display: "flex",
           // overflow: "auto",
-          flexWrap: "nowrap",
+          flexWrap: "wrap",
           width: "100%",
-          mt:1.8    
+        //   mt:1.8    
         }}
       >
         {<CardBox data={homeElem[elem].splice(0,4)} />}

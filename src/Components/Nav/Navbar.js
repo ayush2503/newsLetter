@@ -7,59 +7,18 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import { Link } from "react-router-dom";
+
+import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@mui/material";
 import SearchBox from "../SearcBox/SearchBox";
 
-
-
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, .2),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginLeft: 0,
-  width: "35%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "20%",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(1)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "30ch",
-      "&:focus": {
-        width: "28ch",
-      },
-    },
-  },
-}));
-
 export default function SearchAppBar() {
   const [query, setquery] = useState("")
   const [toggleSearch, settoggleSearch] = useState(false)
+  const menuItems=[{label:"buisness",route:"/category/buisness"},{label:"sports",route:"/category/sports"},{label:"politics",route:"/category/politics"}]
+  const params=useParams()
+  console.log(" dada",params);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed">
@@ -72,35 +31,44 @@ export default function SearchAppBar() {
             component="div"
             color={"white"}
             // sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            sx={{fontSize:"1.5vmax"}}
           >
             Logo
           </Typography>
             </Link>
-          <Box  sx={{ml:5}} style={{ display: "flex", alignItems: "center" }}>
-            <Link style={{textDecoration:"none"}} to={"/"}>
-            <Typography  sx={{color:'white',fontSize:16,mr:2}}>
+          <Box  sx={{ml:"3vmax"}} style={{ display: "flex", alignItems: "center" }}>
+          <Link style={{textDecoration:"none"}} to="/">
+            <Typography  sx={{color:params.label===undefined?'white':"#dadada",fontSize:"1vmax",mr:"1vmax"}}>
               Home
             </Typography>
             </Link>
-            <Link style={{textDecoration:"none"}} to="/category/buisness">
-            <Typography  sx={{color:'white',fontSize:16,mr:2}}>
+          {menuItems.map(elem=>
+            <Link style={{textDecoration:"none"}} to={`${elem.route}`}>
+            <Typography  sx={{color:elem.label===params.label ?'white':"#dadada",fontSize:"1vmax",mr:"1vmax",textTransform:"capitalize"}}>
+             {elem.label}
+            </Typography>
+            </Link>
+            
+            )}
+            {/* <Link style={{textDecoration:"none"}} to="/category/buisness">
+            <Typography  sx={{color:'white',fontSize:"1vmax",mr:"1vmax"}}>
               Buisness
             </Typography>
             </Link>
             <Link style={{textDecoration:"none"}}  to="/category/sports">
-            <Typography  sx={{color:'white',fontSize:16,mr:2}}>
+            <Typography  sx={{color:'white',fontSize:"1vmax",mr:"1vmax"}}>
               Sports
             </Typography>
             </Link >
             <Link style={{textDecoration:"none"}}  to="/category/politics">
-            <Typography  sx={{color:'white',fontSize:16,mr:2}}>
+            <Typography  sx={{color:'white',fontSize:"1vmax",mr:"1vmax"}}>
               Politics
             </Typography>
-            </Link>
+            </Link> */}
           </Box>
           </div>
-          {/* <Button onClick={()=>settoggleSearch(!toggleSearch)} sx={{bgcolor:"white",opacity:0.8}}>Search</Button> */}
-          {/* <SearchBox/> */}
+         
+          <SearchBox/>
          
         </Toolbar>
       </AppBar>

@@ -51,7 +51,7 @@ function Category_layout(props) {
     if (cardData.length <= 0) setCategoryData([]);
     else {
       setCategoryData(allPosts);
-      setlatestData(allPosts.splice(0,3))
+      setlatestData(allPosts.slice(0,3))
       settrendingData(trendingPosts)
     }
     setLoaderState(false);
@@ -71,9 +71,9 @@ function Category_layout(props) {
 
   const tabs = ["Latest", "Trending", "All"];
   return (
-    <Box sx={{ mt: 5 }}>
+    <Box sx={{ mt: "2vmax" }}>
       <Typography
-        sx={{ fontSize: 22, textTransform: "capitalize", fontWeight: 500 }}
+        sx={{ fontSize: "1.5vmax", textTransform: "capitalize", fontWeight: 500,color:"#49C5B6" }}
       >
         {para.label}
       </Typography>
@@ -83,8 +83,8 @@ function Category_layout(props) {
             <Box  onClick={()=>settab(index)}>
             <Typography
                 sx={{
-                mr: 3,
-                fontSize: 21,
+                mr:"2vmax",
+                fontSize: "1.3vmax",
                 cursor: "pointer",
                 textTransform: "capitalize",
                 color: tabIndex === index?"black":"#dadada"
@@ -97,7 +97,7 @@ function Category_layout(props) {
           </Box>
         ))}
       </Box>
-      <Divider sx={{ width: "100%", mt: 1.8, bgcolor: "#F8FFFE" }} />
+      <Divider sx={{ width: "90%", mt:" 1vmax", bgcolor: "#F8FFFE" }} />
 
       <Box style={{ display: "flex", flexWrap: "wrap", flexGrow: 1 }}>
         {console.log("kds",tabIndex)}

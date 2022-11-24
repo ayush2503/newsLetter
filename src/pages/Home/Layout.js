@@ -9,41 +9,39 @@ import CardBox from "../../Components/Cards/CardBox";
 import { Navigate, Outlet } from "react-router-dom";
 import Footer from "../../Components/Home_layout/Footer";
 function Layout() {
-  
-  
-  return ( 
-    // <div>
+  return (
     <>
       <SearchAppBar />
-      <Box sx={{ px: 4, mt: 5 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={9}>
-            {/* <BodyNav item={["Latest", "Popular", "Trending"]} /> */}
-            <Box sx={{ py: 2, minHeight: "80vh" }}>
-              
-              <Outlet/>
-                {/* <CardBox/> */}
-            </Box>
-          </Grid>
-          <Grid item xs={3}>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "90vh",
-              }}
-            >
-              <Categories />
-            </Box>
-          </Grid>
-        </Grid>
-        {/* <BodyNav/> */}
-      </Box>
-        <Footer/>
-    </>
+      <Box
+        sx={{
+          px: 4,
+          mt: 5,
+          display: "flex",
+          flexDirection: { xs:"column-reverse", sm: "row" },      
+        }}
+      >
+       
 
-    // </div>
+        <Box sx={{ py: 2, minHeight: "80vh",width:{sm:"90%"} }}>
+          <Outlet />
+        </Box>
+        <Box
+          sx={{
+            display: {sm:"flex",xs:"block"},
+            // justifyContent: "center",
+            // alignItems: "center",
+            // height: "90vh",
+            width:{sm:"22%"},
+            flexWrap:"wrap",
+            p:"1vmax"
+            
+          }}
+        >
+          <Categories />
+        </Box>
+      </Box>
+      <Footer />
+    </>
   );
 }
 

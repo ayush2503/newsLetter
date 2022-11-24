@@ -5,12 +5,12 @@ function BodyNav({item,...props}) {
   console.log(css);
   return (
     <>
-    <div style={{display:'flex',marginTop:'3vmax'}}>
+    <div style={{display:'flex',marginTop:'2vmax'}}>
 
-      {item?.map((elem)=> <Typography sx={{mr:3,fontSize:21,cursor:'pointer',textTransform:"capitalize"}}>{elem}</Typography> )}
+      {item?.map((elem)=> <Typography sx={{mr:3,fontSize:"1.6vmax",cursor:'pointer',textTransform:"capitalize",}}>{elem}</Typography> )}
       
     </div>
-    <Divider sx={{width:"100%",mt:1.8,bgcolor:"#F8FFFE"}}/>
+    <Divider sx={{width:"100%",mt:"1vmax",bgcolor:"#F8FFFE"}}/>
     </>
   )
 }
