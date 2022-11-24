@@ -2,12 +2,14 @@ import { Box, CardMedia } from "@mui/material";
 import { collection, getDocs } from "firebase/firestore";
 import moment from "moment/moment";
 import React, { useState, useEffect } from "react";
-import { Link, Navigate, redirect, useNavigate } from "react-router-dom";
+import { Link, Navigate, redirect, useLocation, useNavigate } from "react-router-dom";
 import { db } from "../../Config/firebase";
 import BodyNav from "../Nav/BodyNav";
 
 function CardBox({ data,route }) {
  const navigate=useNavigate()
+ const location= useLocation()
+//  console.log("location",location);
 // console.log(moment(data[0].timeStamp.seconds))
 if(data.length<=0)
   return <div>no data found</div>
@@ -29,7 +31,7 @@ if(data.length<=0)
             mt:"1.4vmax"
           }}
         // onClick={()=><Navigate to={`category/${elem.tag}/${elem.id}`} replace/>}
-        onClick={()=>navigate(`${elem.id}`)}
+        onClick={()=>navigate(location.pathname==="/"?`category/${elem.tag}/${elem.id}`:`${elem.id}`)}
         >
           <CardMedia
             component="img"

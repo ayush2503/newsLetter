@@ -29,7 +29,7 @@ if(!data)
     return <div>no data</div>
   return (
     <Box sx={{bgcolor:"white",p:"1vmax",boxShadow:14,m:"2vmax",mt:"3vmax"}}>
-        <Typography sx={{textTransform:"uppercase",fontWeight:500,fontSize:"0.9vmax"}}>{data?.tag}</Typography>
+        <Typography sx={{textTransform:"uppercase",fontWeight:500,fontSize:"1vmax"}}>{data?.tag}</Typography>
         <Typography sx={{fontSize:"1.4vmax",fontWeight:500,mt:1,mb:0.1}}>{data?.heading}</Typography>
         <Typography sx={{fontSize:"0.6vmax"}}>{moment(data?.createdAt?.seconds*1000).format("LL")}</Typography>
         <CardMedia
@@ -40,7 +40,7 @@ if(!data)
          alt=""
          sx={{mt:2,mb:1}}
         />
-        <Typography sx={{fontSize:14,fontWeight:500,mt:1.5,mb:2}}>Spread the love</Typography>
+        <Typography sx={{fontSize:"1.2vmax",fontWeight:500,mt:1.5,mb:2}}>Spread the love</Typography>
         {/* <Typography>{data?.body}</Typography> */}
         <Typography sx={{fontSize:"1vmax"}}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt porro, alias expedita eligendi quo doloremque beatae veritatis voluptatum hic. Molestiae quibusdam voluptatibus deserunt similique delectus, voluptatum quis reprehenderit tempora nihil inventore quae saepe esse! Delectus sapiente hic, voluptatem est voluptates error architecto veniam earum culpa molestiae ex? Suscipit necessitatibus doloremque aliquid, est totam tempora culpa accusantium doloribus? Quae aut sequi vero, quasi eos minus deserunt incidunt libero velit nostrum optio dignissimos aliquam perferendis dolores fugiat voluptate minima reiciendis dolorum itaque praesentium. Nisi illo, accusamus voluptatibus perferendis quisquam earum magnam culpa. Quisquam nihil obcaecati necessitatibus. Enim fugiat omnis perferendis excepturi explicabo?
