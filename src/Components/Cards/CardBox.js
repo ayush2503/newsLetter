@@ -9,7 +9,7 @@ import BodyNav from "../Nav/BodyNav";
 function CardBox({ data,route }) {
  const navigate=useNavigate()
  const location= useLocation()
-//  console.log("location",location);
+ console.log("location",data);
 // console.log(moment(data[0].timeStamp.seconds))
 if(data.length<=0)
   return <div>no data found</div>
@@ -35,10 +35,12 @@ if(data.length<=0)
         >
           <CardMedia
             component="img"
-            // height="120vmax"
-            width="100max"
-            image="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png"
+            // height="160vmax"
+            width="80vmax"
+            // image="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png"
+            image={elem?.image ?elem.image:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png"}
             alt="Paella dish"
+            sx={{height:{sm:"12vmax",xs:"12vmax"}}}
           />
           <div style={{ padding: "1vmax" }}>
             <p style={{fontSize:"1vmax"}}>{elem.title}</p>

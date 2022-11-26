@@ -6,6 +6,7 @@ import {
   ListItemText,
   MenuItem,
   Select,
+  TextField,
   Typography,
 } from "@mui/material";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
@@ -27,6 +28,7 @@ function AddArticle() {
   const [subHead, setSubhead] = useState("");
   const [category, setcategory] = useState("");
   const [isTrending, setisTrending] = useState("");
+  const [imageLoader, setimageLoader] = useState(false);
   const [body, setBody] = React.useState("");
   const [img, setImg] = React.useState("");
   const [imgname, setImgName] = React.useState("");
@@ -38,17 +40,29 @@ function AddArticle() {
     (state) => state.navSection
   );
   const upload = async (file) => {
-    const storage = getStorage();
-    const storageRef = ref(storage, "img/" + file.name);
-
-    uploadBytes(storageRef, file).then((snapshot) => {
-      console.log("Uploaded a blob or file!", snapshot);
-      getDownloadURL(storageRef).then((url) => {
-        // Insert url into an <img> tag to "download"
-        console.log(url);
-        setImg(url);
-      });
-    });
+    
+      try{
+    if(file){
+        setimageLoader(true)
+        const storage = getStorage();
+        const storageRef = ref(storage, "img/" + file.name);
+    
+        uploadBytes(storageRef, file).then((snapshot) => {
+          console.log("Uploaded a blob or file!", snapshot);
+          getDownloadURL(storageRef).then((url) => {
+            // Insert url into an <img> tag to "download"
+            console.log(url);
+            setImg(url);
+            setimageLoader(false)
+          });
+    
+        });
+    
+}}catch(err){
+    if(file){
+        setimageLoader(false)
+    }
+}
   };
   const handleArticle = async () => {
     console.log("first");
@@ -65,8 +79,8 @@ function AddArticle() {
     setImgName("")
     setisTrending("");
   };
-
-  if (sectionLoader) {
+//   if(imageLoader)
+  if (sectionLoader || imageLoader) {
     return <Loader />;
   }
 
@@ -110,9 +124,18 @@ function AddArticle() {
             handleChange={(val) => setBody(val.target.value)}
             // style={{width:"60vw"}}
             sx={{ width: "100%", mb: 4 }}
-            multiline={true}
+            rows={10}
+            multiline
           />
 
+{/* <TextField
+          id="filled-multiline-static"
+          label="Multiline"
+          multiline
+          rows={4}
+          defaultValue="Default Value"
+          variant="standard"
+        /> */}
           <BasicSelect
             label="Select Category"
             value={category}

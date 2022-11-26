@@ -16,6 +16,8 @@ function TextInput(props) {
     style={{padding:0}}
     select={select || false}
     SelectProps={selectProps || {}}
+    rows={props?.rows}
+    disabled={props.disabled===true ? true : false}
   />
   )
 }

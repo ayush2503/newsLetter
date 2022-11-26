@@ -1,10 +1,31 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import InstagramIcon from '@mui/icons-material/Instagram';
+import MailIcon from '@mui/icons-material/Mail';
 import FacebookIcon from '@mui/icons-material/Facebook';
+import TwitterIcon from '@mui/icons-material/Twitter';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-function Footer() {
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../Config/firebase";
+export default function Footer() {
+    const [fetchContacts, setfetchContacts] = useState([])
+    const params=useParams()
+    useEffect(() => {
+        // fetchContacts.length<=0 &&
+        getDocs(collection(db, "SocialLinks")).then((snapData) => {
+            const links = [];
+            // const data=querySnapshot.data()
+            snapData.forEach((doc) => {
+              console.log(doc.data());
+              links.push({ handle: doc.data().handle, id: doc.id,handleLink:doc.data().handleLink });
+            });   
+            setfetchContacts([...links]);
+    }
+    )},[params.label])
+   
+    
+    
   return (
     <Box
       sx={{
@@ -23,19 +44,43 @@ function Footer() {
           LOGO
         </Typography>
         <Typography color={"#F3F3F3"} sx={{fontSize:"1vmax"}}>Follow Us On</Typography>
+
         <Box sx={{mt:"1vmax",display:"flex",alignItems:"center"}}>
-        <Link to={{ pathname: "https://herewecode.io/" }} target="_blank">
-        <InstagramIcon sx={{color:"white",fontSize:"1.5vmax"}}  />
 
-        </Link>
-        <Link to={{ pathname: "https://herewecode.io/" }} target="_blank">
+        {fetchContacts?.map((elem)=>{
+            if(elem.handleLink !== ""){
+                console.log({elem});
+                switch (elem.handle) {
+                    case "Gmail":
+                        
+                        return <Link to={{ pathname: elem.handleLink }} target="_blank">
 
-        <FacebookIcon sx={{color:"white",ml:"1vmax",mr:"1vmax",fontSize:"1.5vmax"}} />
-        </Link>
-        <Link to={{ pathname: "https://herewecode.io/" }} target="_blank">
+                        <MailIcon sx={{color:"white",fontSize:"1.5vmax",mr:"1vmax"}}/>
+                        </Link>;
+                    case "PhoneNumber":
+                            return <Link to={{ pathname: elem.handleLink }} target="_blank">
 
-        <LocalPhoneIcon sx={{color:"white",fontSize:"1.5vmax"}}/>
-        </Link>
+                            <LocalPhoneIcon sx={{color:"white",fontSize:"1.5vmax",mr:"1vmax"}}/>
+                            </Link>
+                    case "Twitter":
+                        return <Link to={{ pathname: elem.handleLink }} target="_blank">
+
+                        <TwitterIcon sx={{color:"white",fontSize:"1.5vmax",mr:"1vmax"}}/>
+                        </Link>
+                    case "Instagram":
+                        return  <Link to={{ pathname: elem.handleLink }} target="_blank">
+                        <InstagramIcon sx={{color:"white",fontSize:"1.5vmax",mr:"1vmax"}}  />
+                        </Link>
+                    case "Facebook":
+                        return    <Link to={{ pathname: elem.handleLink }} target="_blank">
+
+                        <FacebookIcon sx={{color:"white",mr:"1vmax",fontSize:"1.5vmax"}} />
+                        </Link>
+                    default:
+                        break;
+                }}
+        })}
+       
         </Box>
       </div>
       <div style={{ height: "60%", width: "55%",marginLeft:"1vmax" }}>
@@ -65,7 +110,7 @@ function Footer() {
         </Box>
       </div>
     </Box>
-  );
+  )
 }
 
-export default Footer;
+
