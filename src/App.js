@@ -41,28 +41,30 @@ function App() {
     // <div>app</div>
     <ThemeProvider theme={theme}>
       {/* {console.log("reder")} */}
-      
+
       <Routes>
-      
         <Route path={"/"} element={<Layout />}>
-          <Route index element={<Home_layout/>} />
+          <Route index element={<Home_layout />} />
           {/* <Route path="about_us" element={<div>about us</div>}/> */}
-        <Route path="tnc" element={<div style={{margin:'5vmax'}}>Terms And Condition</div>}/>
-        <Route path="privacy_Policy" element={<PrivacyPolicy/>}/>
-        <Route path="search"  element={<Outlet/>}>
-            <Route path=":query" element={<SearchPage/>}/>
+
+          <Route
+            path="tnc"
+            element={<div style={{ margin: "5vmax" }}>Terms And Condition</div>}
+          />
+          <Route path="privacy_Policy" element={<PrivacyPolicy />} />
+          <Route path="search" element={<Outlet />}>
+            <Route path=":query" element={<SearchPage />} />
           </Route>
+          <Route path="*" element={<Navigate to={"/404"} replace />} />
         </Route>
         <Route path={"/category"} element={<Layout />}>
-          <Route path=":label" element={<Category_layout/>}/>
-          <Route path=":label/:id" element={<ArticleDetails/>}/>
+          <Route path=":label" element={<Category_layout />} />
+          <Route path=":label/:id" element={<ArticleDetails />} />
         </Route>
-        <Route path="/404" element={<Layout/>}>
-            <Route index element={<div>404 Page not found</div>}/>
+        <Route path="/404" element={<Layout />}>
+          <Route index element={<div>404 Page not found</div>} />
         </Route>
-        
-        
-      
+
         {/* <Route path="/login"element={<Login/>} /> */}
         <Route path="/api/v1/admin/login" element={<Login />} />
         <Route
@@ -150,7 +152,6 @@ function App() {
             />
           </Route>
         </Route>
-
       </Routes>
       <ToastContainer
         position="bottom-center"
