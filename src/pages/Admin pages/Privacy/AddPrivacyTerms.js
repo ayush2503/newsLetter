@@ -9,6 +9,7 @@ function AddPrivacyTerms() {
   const [polLabel, setpolLabel] = useState("");
   const [content, setcontent] = useState("");
   const dispatch = useDispatch();
+  console.log("object");
   const { categories, sectionLoader } = useSelector(
     (state) => state.navSection
   );
