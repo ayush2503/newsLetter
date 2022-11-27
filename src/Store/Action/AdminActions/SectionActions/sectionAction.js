@@ -5,7 +5,7 @@ import { FETCH_CATEGORIES, FETCH_POLICY, FETCH_SOCIAL_HANDLES, SECTION_LOADER } 
 import { async } from "@firebase/util";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
-export const addCategory=(value)=>async (dispatch)=>{
+export const addCategory=(value,displayOnMenu)=>async (dispatch)=>{
   dispatch({
     type:SECTION_LOADER,
     sectionLoader:true
@@ -15,7 +15,8 @@ export const addCategory=(value)=>async (dispatch)=>{
     const docRef = await addDoc(collection(db, "Categories"), {
         label: value,
         createdAt:Timestamp.now(),
-        updatedAt:Timestamp.now()
+        updatedAt:Timestamp.now(),
+        displayOnMenu:displayOnMenu
       });
 
       console.log("Document written with ID: ", docRef.id);

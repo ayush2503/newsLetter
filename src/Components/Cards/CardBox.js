@@ -29,8 +29,13 @@ if(data.length<=0)
             overflow: "hidden",
             cursor:"pointer",
             mt:"1.4vmax",
+            borderRadius:"0.7vmax",
+            transition: "all .2s ease-in-out",
             "&:hover":{
-              bgcolor:"#dadada"
+              bgcolor:"#F5FFFE",
+              scale:"1.02",
+              boxShadow:15,
+              borderRadius:"1vmax"
             }
           }}
         // onClick={()=><Navigate to={`category/${elem.tag}/${elem.id}`} replace/>}

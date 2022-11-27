@@ -9,10 +9,13 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@mui/material";
 import SearchBox from "../SearcBox/SearchBox";
+import { useEffect } from "react";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../../Config/firebase";
 // const useStyles = makeStyles((theme) => ({
 //   root: {
 //     // "& .MuiFilledInput-root": {
@@ -35,12 +38,28 @@ import SearchBox from "../SearcBox/SearchBox";
 // }));
 export default function SearchAppBar() {
   // const classes = useStyles();
-  const [query, setquery] = useState("")
+  const location=useLocation()
+  // const [Searchquery, setquery] = useState("")
+  const [menuItems, setmenuItems] = useState([])
   const [toggleSearch, settoggleSearch] = useState(false)
-  const menuItems=[{label:"buisness",route:"/category/buisness"},{label:"sports",route:"/category/sports"},{label:"politics",route:"/category/politics"}]
+  // const menuItems=[{label:"buisness",route:"/category/buisness"},{label:"sports",route:"/category/sports"},{label:"politics",route:"/category/politics"}]
   const params=useParams()
+useEffect(() => {
+  const q = query(collection(db, "Categories"), where("displayOnMenu", "==", "True"));
+  getDocs(q).then((snapData) => {
+    const cata = [];
+    // const data=querySnapshot.data()
+    snapData.forEach((doc) => {
+      console.log(doc.data());
+      cata.push({ label: doc.data().label, id: doc.id ,route:`/category/${doc.data().label}`});
+    });
 
-  console.log(" dada",params);
+    setmenuItems([...cata]);
+  });
+
+}, [location.pathname])
+
+  console.log(" dada",menuItems);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed">
@@ -66,8 +85,8 @@ export default function SearchAppBar() {
               Home
             </Typography>
             </Link>
-          {menuItems.map(elem=>
-            <Link style={{textDecoration:"none"}} to={`${elem.route}`}>
+          {menuItems?.map((elem,index)=>
+            <Link key={index} style={{textDecoration:"none"}} to={`${elem.route}`}>
             <Typography  sx={{color:elem.label===params.label ?'white':"#dadada",fontSize:"1vmax",mr:"1vmax",textTransform:"capitalize",  '&:hover': {
               color: 'white'
             }}}>
