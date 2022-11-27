@@ -30,6 +30,7 @@ import Category_layout from "./Components/Category_Layout/Category_layout";
 import ArticleDetails from "./pages/ArticleDetails/ArticleDetails";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
 import SearchPage from "./pages/SearchPage/SearchPage";
+import Tnc from "./pages/PrivacyPolicy/Tnc";
 // import SocialList from './pages/Admin pages/SocialList/SocialList';
 function App() {
   const { isAuthenticated, isnavloading } = useSelector(
@@ -49,11 +50,12 @@ function App() {
 
           <Route
             path="tnc"
-            element={<div style={{ margin: "5vmax" }}>Terms And Condition</div>}
+            element={<div style={{ margin: "5vmax" }}><Tnc/></div>}
           />
           <Route path="privacy_Policy" element={<PrivacyPolicy />} />
           <Route path="search" element={<Outlet />}>
             <Route path=":query" element={<SearchPage />} />
+            <Route path=":query/:id" element={<ArticleDetails />} />
           </Route>
           <Route path="*" element={<Navigate to={"/404"} replace />} />
         </Route>

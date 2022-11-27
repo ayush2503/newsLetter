@@ -48,6 +48,7 @@ function EditPrivacyTerms(props) {
                         value={content.label}
                         handleChange={(val) => setcontent({...content,label:val.target.value})}
                         // style={{width:"60vw"}}
+                        disabled={true}
                         sx={{ width: "100%", mb: 4 }}
                     />
                     <TextInput
@@ -57,6 +58,7 @@ function EditPrivacyTerms(props) {
                         // style={{width:"60vw"}}
                         sx={{ width: "100%", mb: 4 }}
                         multiline={true}
+                        rows={10}
                     />
                     {/* <MyStatefulEditor
         // value={this.state.value}

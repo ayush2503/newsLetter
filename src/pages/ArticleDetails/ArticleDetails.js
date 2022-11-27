@@ -7,6 +7,7 @@ import { db } from '../../Config/firebase'
 
 function ArticleDetails() {
     const [data,setData]=useState({})
+    
     const params=useParams()
      useEffect(() => {
         const getdata=async()=>{
@@ -21,14 +22,19 @@ function ArticleDetails() {
           } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
+
           }
         }
         getdata()
     }, [])
-if(!data)
-    return <div>no data</div>
+if(Object.keys(data).length<= 0)
+    return <Box sx={{mt:"3vmax"}}>
+        <Typography sx={{fontSize:"1.2vmax"}}>Data not found</Typography>
+        </Box>
   return (
+    
     <Box sx={{bgcolor:"white",p:"1vmax",boxShadow:14,m:"2vmax",mt:"3vmax"}}>
+  {      console.log(data)}
         <Typography sx={{textTransform:"uppercase",fontWeight:500,fontSize:"1vmax"}}>{data?.tag}</Typography>
         <Typography sx={{fontSize:"1.4vmax",fontWeight:500,mt:1,mb:0.1}}>{data?.heading}</Typography>
         <Typography sx={{fontSize:"0.6vmax"}}>{moment(data?.createdAt?.seconds*1000).format("LL")}</Typography>

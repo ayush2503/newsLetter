@@ -9,7 +9,7 @@ import BodyNav from "../Nav/BodyNav";
 function CardBox({ data,route }) {
  const navigate=useNavigate()
  const location= useLocation()
- console.log("location",data);
+ console.log("location",location);
 // console.log(moment(data[0].timeStamp.seconds))
 if(data.length<=0)
   return <div>no data found</div>

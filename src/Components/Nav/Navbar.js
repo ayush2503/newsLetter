@@ -44,7 +44,7 @@ export default function SearchAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed">
-        <Toolbar sx={{justifyContent:'space-between'}}>
+        <Toolbar sx={{justifyContent:'space-between',px:"1vmax"}}>
           <div style={{display:'flex'}}>
             <Link to="/" style={{textDecoration:"none"}}>
           <Typography
@@ -94,7 +94,7 @@ export default function SearchAppBar() {
           </Box>
           </div>
          
-          <SearchBox/>
+          <SearchBox />
          
         </Toolbar>
       </AppBar>

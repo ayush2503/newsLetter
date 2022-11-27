@@ -87,7 +87,10 @@ function Category_layout(props) {
                 fontSize: "1.3vmax",
                 cursor: "pointer",
                 textTransform: "capitalize",
-                color: tabIndex === index?"black":"#dadada"
+                color: tabIndex === index?"black":"#dadada",
+                "& .MuiChip-root:hover":{
+                    bgcolor:"black"
+                }
                 }}
 
            

@@ -40,6 +40,13 @@ export const addSocialLinks=(value)=>async (dispatch)=>{
 
 export const addPrivacyPolicies=({value,data})=>async (dispatch)=>{
     console.log("here")
+    dispatch({
+      type:SECTION_LOADER,
+      sectionLoader:true
+    })
+    try{
+
+    
     const docRef = await addDoc(collection(db, "Privacy Policies"), {
         label: value,
         body:data,
@@ -47,6 +54,14 @@ export const addPrivacyPolicies=({value,data})=>async (dispatch)=>{
         updatedAt:Timestamp.now()
       });
       console.log("Document written with ID: ", docRef.id);
+    }catch(e)
+    {
+      console.log(e);
+    }
+    dispatch({
+      type:SECTION_LOADER,
+      sectionLoader:false
+    })
 }
 
 

@@ -62,7 +62,9 @@ function Categories() {
               {/* <Box  sx={{textAlign:'center',p:1.5,bgcolor:'white',color:'black',fontSize:16,borderBottomColor:"black",cursor:"pointer",mb:1,textTransform:"capitalize"}}>
             {elem.label}
          </Box> */}
-              <Chip label={elem.label} size="small" sx={{mr:{sm:"0.5vmax",xs:"0.6vmax"},mb:{sm:"0.4vmax",xs:"0.6vmax"},bgcolor:elem.label===params.label?"#A8CCC8":""}} variant="outlined" clickable />
+              <Chip label={elem.label} size="small" sx={{mr:{sm:"0.5vmax",xs:"0.6vmax"},mb:{sm:"0.4vmax",xs:"0.6vmax"},bgcolor:elem.label===params.label?"#A8CCC8":"",  "& 	.MuiChip-sizeSmall:hover":{
+                    backgroundColor:"black"
+                }}} variant="outlined" clickable />
             </Link>
           );
         })}

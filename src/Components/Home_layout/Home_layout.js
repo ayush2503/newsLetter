@@ -48,7 +48,9 @@ function Home_layout({data}) {
  {HomeCategory.map(elem => {
 return(
  <Box>
+    {/* {console.log("homeLayout",elem)} */}
     <BodyNav item={[elem]} />
+    
       <Box
         sx={{
           minHeight: "17vmax",
