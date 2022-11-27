@@ -1,6 +1,7 @@
 import { CardMedia } from '@mui/material'
 import { Box } from '@mui/system'
 import { collection, getDocs } from 'firebase/firestore';
+import moment from 'moment';
 import React, { useEffect, useState } from 'react'
 import { db } from '../../Config/firebase';
 import CardBox from '../Cards/CardBox';
@@ -61,8 +62,9 @@ return(
         //   mt:1.8    
         }}
       >
-        {<CardBox data={homeElem[elem].splice(0,4)} />}
-     
+        {<CardBox data={homeElem[elem].sort((a,b)=>moment(a?.timeStamp?.seconds).diff(b?.timeStamp?.seconds)).reverse().splice(0,4)} />}
+        
+      {/* }).reverse(); */}
       </Box>
 
  </Box>
