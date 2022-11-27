@@ -6,8 +6,8 @@ import { toast } from 'react-toastify'
 import { loginAction } from '../../../Store/Action/AdminActions/AuthActions/AuthActions'
 
 function Login() {
-    const [email, setemail] = useState("admin1234@gmail.com")
-    const [password, setpassword] = useState("admin)(*&")
+    const [email, setemail] = useState("")//admin1234@gmail.com
+    const [password, setpassword] = useState("")//"admin)(*&
     const dispatch=useDispatch()
     const navigate= useNavigate()
 const handleEmailChange=(val)=>{

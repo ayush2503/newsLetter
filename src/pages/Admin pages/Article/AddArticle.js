@@ -173,7 +173,7 @@ function AddArticle() {
           <Button
             color="success"
             variant="contained"
-            sx={{ px: 4, py: 1, width: "10vmax" }}
+            sx={{ px: 4, py: 1, width: "10vmax" ,mt:"1vmax"}}
             onClick={() => handleArticle()}
           >
             Add

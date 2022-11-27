@@ -20,7 +20,7 @@ function AddPrivacyTerms() {
       elevation={3}
       sx={{
         width: "100%",
-        height: "25vmax",
+        height: "35vmax",
         pt: "20px",
         mb: 3,
         px: 3,
@@ -47,6 +47,7 @@ function AddPrivacyTerms() {
           // style={{width:"60vw"}}
           sx={{ width: "100%", mb: 4 }}
           multiline={true}
+          rows={10}
         />
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
