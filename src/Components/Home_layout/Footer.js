@@ -55,26 +55,26 @@ export default function Footer() {
                         
                         return <Link to={{ pathname: elem.handleLink }} target="_blank">
 
-                        <MailIcon sx={{color:"white",fontSize:"1.5vmax",mr:"1vmax"}}/>
+                        <MailIcon sx={{color:"white",fontSize:"1.5vmax",mr:"1vmax","&:hover":{color:"#49C5B6"}}}/>
                         </Link>;
                     case "PhoneNumber":
                             return <Link to={{ pathname: elem.handleLink }} target="_blank">
 
-                            <LocalPhoneIcon sx={{color:"white",fontSize:"1.5vmax",mr:"1vmax"}}/>
+                            <LocalPhoneIcon sx={{color:"white",fontSize:"1.5vmax",mr:"1vmax","&:hover":{color:"#49C5B6"}}}/>
                             </Link>
                     case "Twitter":
                         return <Link to={{ pathname: elem.handleLink }} target="_blank">
 
-                        <TwitterIcon sx={{color:"white",fontSize:"1.5vmax",mr:"1vmax"}}/>
+                        <TwitterIcon sx={{color:"white",fontSize:"1.5vmax",mr:"1vmax","&:hover":{color:"#49C5B6"}}}/>
                         </Link>
                     case "Instagram":
                         return  <Link to={{ pathname: elem.handleLink }} target="_blank">
-                        <InstagramIcon sx={{color:"white",fontSize:"1.5vmax",mr:"1vmax"}}  />
+                        <InstagramIcon sx={{color:"white",fontSize:"1.5vmax",mr:"1vmax","&:hover":{color:"#49C5B6"}}}  />
                         </Link>
                     case "Facebook":
                         return    <Link to={{ pathname: elem.handleLink }} target="_blank">
 
-                        <FacebookIcon sx={{color:"white",mr:"1vmax",fontSize:"1.5vmax"}} />
+                        <FacebookIcon sx={{color:"white",mr:"1vmax",fontSize:"1.5vmax","&:hover":{color:"#49C5B6"}}} />
                         </Link>
                     default:
                         break;
@@ -101,10 +101,10 @@ export default function Footer() {
             <Typography color={"white"}>About Us</Typography>
           </Link> */}
           <Link to="/tnc" style={{textDecoration:"none"}}>
-            <Typography color={"white"} sx={{fontSize:"1.1vmax",pr:"1.3vmax"}}>Terms And Conditions</Typography>
+            <Typography color={"white"} sx={{fontSize:"1.1vmax",pr:"1.3vmax","&:hover":{color:"#49C5B6"}}}>Terms And Conditions</Typography>
           </Link>
           <Link to="/privacy_Policy" style={{textDecoration:"none"}}>
-            <Typography color={"white"} sx={{fontSize:"1.1vmax"}}>Privacy Policy</Typography>
+            <Typography color={"white"} sx={{fontSize:"1.1vmax","&:hover":{color:"#49C5B6"}}}>Privacy Policy</Typography>
           </Link>
           
         </Box>

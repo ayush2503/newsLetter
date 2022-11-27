@@ -88,12 +88,12 @@ const navigate=useNavigate()
               width: "12vmax",
               borderRadius: "0.2vmax",
               padding: "0.2vmax",
-              fontSize:"1vmax"
+              fontSize:"1vmax",
             }}
             type="text"
           />
           <Box onClick={handleSearch}>
-            <SearchIcon sx={{ fontSize: "1.4vmax", ml: "0.3vmax" ,cursor:"pointer",}} />
+            <SearchIcon sx={{ fontSize: "1.4vmax", ml: "0.3vmax" ,cursor:"pointer","&:hover":{color:"#49C5B6"}}} />
           </Box>
 
           {/* </div> */}
