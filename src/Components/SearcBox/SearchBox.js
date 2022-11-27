@@ -32,11 +32,17 @@ const navigate=useNavigate()
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
   const handleSearch = () => {
+    if(query.length>0){
+      
+    
     // navigate(`/search?q=${createSearchParams(query)}`)
     navigate({
         pathname:"/search",
         search:`?q=${query}`
-    })
+    })}
+    else{
+        alert("Please Enter Search Query")
+    }
     setquery("")
   };
   const handleClickAway = () => {
