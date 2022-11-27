@@ -28,7 +28,10 @@ if(data.length<=0)
             boxShadow: 10,
             overflow: "hidden",
             cursor:"pointer",
-            mt:"1.4vmax"
+            mt:"1.4vmax",
+            "&:hover":{
+              bgcolor:"#dadada"
+            }
           }}
         // onClick={()=><Navigate to={`category/${elem.tag}/${elem.id}`} replace/>}
         onClick={()=>navigate(location.pathname==="/"?`category/${elem.tag}/${elem.id}`:`${elem.id}`)}

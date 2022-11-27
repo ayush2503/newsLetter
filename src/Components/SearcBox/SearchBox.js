@@ -22,6 +22,7 @@ const navigate=useNavigate()
 
   const handleClick = (event) => {
     setAnchorEl(true);
+    setquery("")
   };
 
   const handleClose = () => {

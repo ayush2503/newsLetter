@@ -67,7 +67,7 @@ function Category_layout(props) {
   }, [para.label]);
 
   if (LoaderState)
-    return <Box sx={{ mt: 5 }}> Article Not Found {LoaderState}</Box>;
+    return <Box sx={{ mt: 5 }}><Typography sx={{fontSize:"1vmax"}}> Article Not Found</Typography> {LoaderState}</Box>;
 
   const tabs = ["Latest", "Trending", "All"];
   return (
@@ -87,10 +87,8 @@ function Category_layout(props) {
                 fontSize: "1.3vmax",
                 cursor: "pointer",
                 textTransform: "capitalize",
-                color: tabIndex === index?"black":"#dadada",
-                "& .MuiChip-root:hover":{
-                    bgcolor:"black"
-                }
+                color: tabIndex === index?"black":"#dadada"
+              
                 }}
 
            

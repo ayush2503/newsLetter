@@ -1,17 +1,20 @@
-import { CardMedia } from '@mui/material'
+import { CardMedia, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import { collection, getDocs } from 'firebase/firestore';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react'
 import { db } from '../../Config/firebase';
 import CardBox from '../Cards/CardBox';
+import Loader from '../Loader/Loader';
 import BodyNav from '../Nav/BodyNav'
 
 function Home_layout({data}) {
     const [homeElem, sethomeElem] = useState({})
     const [HomeCategory,setHomeCategory]=useState([])
+    const [loader,setloader]=useState(false)
     
     useEffect(() => {
+        setloader(true)
       getDocs(collection(db, "Articles")).then(
           (snapData) => {
               let temp={}
@@ -40,10 +43,18 @@ function Home_layout({data}) {
             sethomeElem(temp)
             setHomeCategory(Object.keys(temp))
             // console.log(temp);
+            setloader(false)
         }
-
         );
       }, []);
+
+    //   if(Object.keys(data).length<= 0)
+    // return <Box sx={{mt:"3vmax"}}>
+    //     <Typography sx={{fontSize:"1.2vmax"}}>Data not found</Typography>
+    //     </Box>
+    if(loader){
+        return <Loader/>
+    }
   return (
  <>
  {HomeCategory.map(elem => {
