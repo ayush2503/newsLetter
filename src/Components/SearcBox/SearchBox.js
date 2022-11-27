@@ -8,7 +8,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { getSuggestedQuery } from "@testing-library/react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextInput from "../TextInput";
-import { useNavigate } from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -31,7 +31,12 @@ const navigate=useNavigate()
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
   const handleSearch = () => {
-    navigate(`/search/${query}`)
+    // navigate(`/search?q=${createSearchParams(query)}`)
+    navigate({
+        pathname:"/search",
+        search:`?q=${query}`
+    })
+    setquery("")
   };
   const handleClickAway = () => {
     setAnchorEl(false)
@@ -81,7 +86,7 @@ const navigate=useNavigate()
             type="text"
           />
           <Box onClick={handleSearch}>
-            <SearchIcon sx={{ fontSize: "1.4vmax", ml: "0.3vmax" }} />
+            <SearchIcon sx={{ fontSize: "1.4vmax", ml: "0.3vmax" ,cursor:"pointer",}} />
           </Box>
 
           {/* </div> */}

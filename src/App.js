@@ -31,6 +31,7 @@ import ArticleDetails from "./pages/ArticleDetails/ArticleDetails";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import Tnc from "./pages/PrivacyPolicy/Tnc";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
 // import SocialList from './pages/Admin pages/SocialList/SocialList';
 function App() {
   const { isAuthenticated, isnavloading } = useSelector(
@@ -50,12 +51,12 @@ function App() {
 
           <Route
             path="tnc"
-            element={<div style={{ margin: "5vmax" }}><Tnc/></div>}
+            element={<Tnc/>}
           />
           <Route path="privacy_Policy" element={<PrivacyPolicy />} />
           <Route path="search" element={<Outlet />}>
-            <Route path=":query" element={<SearchPage />} />
-            <Route path=":query/:id" element={<ArticleDetails />} />
+            <Route index element={<SearchPage/>}/>
+            <Route path=":id" element={<ArticleDetails />} />
           </Route>
           <Route path="*" element={<Navigate to={"/404"} replace />} />
         </Route>
@@ -64,7 +65,7 @@ function App() {
           <Route path=":label/:id" element={<ArticleDetails />} />
         </Route>
         <Route path="/404" element={<Layout />}>
-          <Route index element={<div>404 Page not found</div>} />
+          <Route index element={<PageNotFound/>} />
         </Route>
 
         {/* <Route path="/login"element={<Login/>} /> */}

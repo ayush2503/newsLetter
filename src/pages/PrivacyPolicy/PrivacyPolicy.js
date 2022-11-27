@@ -29,7 +29,7 @@ function PrivacyPolicy() {
     }, [])
     
   return (
-    <Box sx={{m:"2.5vmax",boxShadow:15,p:"2.5vmax"}}>
+    <Box sx={{mt:"2.5vmax",boxShadow:15,p:"2.5vmax",width:"95%"}}>
         <Typography variant={'h5'} sx={{mb:"1.5vmax",fontSize:"1.5vmax"}}>{data?.label}</Typography>
         <Typography sx={{fontSize:"1vmax"}}>{data?.body}</Typography>
 
