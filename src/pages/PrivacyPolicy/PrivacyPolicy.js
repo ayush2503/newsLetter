@@ -11,7 +11,7 @@ function PrivacyPolicy() {
     const fetch=async()=>{
         const q= query(
             collection(db, "Privacy Policies"),
-            where("label", "==","Privacy  policy"),
+            where("label", "==","Privacy Policy"),
           
           );
 
