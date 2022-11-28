@@ -46,7 +46,7 @@ if(Object.keys(data).length<= 0)
          alt=""
          sx={{mt:2,mb:1,height:{xs:"15vmax", sm:"20vmax"}}}
         />
-        <Typography sx={{fontSize:"1.2vmax",fontWeight:500,mt:1.5,mb:2}}>Spread the love</Typography>
+        <Typography sx={{fontSize:"1.2vmax",fontWeight:500,mt:"1vmax",mb:"1.1vmax"}}>{data.alternateHeading}</Typography>
         <Typography>{data?.body}</Typography>   
     </Box>
   )

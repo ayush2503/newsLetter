@@ -1,6 +1,6 @@
 
 import { db } from "../../../../Config/firebase";
-import { collection, addDoc, Timestamp, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore"; 
+import { collection, addDoc, Timestamp, getDocs, deleteDoc, doc, updateDoc, query, where, Firestore, writeBatch } from "firebase/firestore"; 
 import { FETCH_CATEGORIES, FETCH_POLICY, FETCH_SOCIAL_HANDLES, SECTION_LOADER } from "../../../Types/AdminType/sectionTypes";
 import { async } from "@firebase/util";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
@@ -227,14 +227,31 @@ export const updateHandleLinks=(val)=>async(dispatch)=>{
     sectionLoader:false
   })
 }
-export const deleteCategory=(docid)=>async (dispatch)=>{
+
+export const deletePostsFromArticle=(tag)=>async (dispatch)=>{
+  const batch = writeBatch(db);
+  console.log("deletePostsFromArticle");
+  const q = query(collection(db, "Articles"), where("tag", "==", tag));
+  const res= await getDocs(q)
+  console.log("object",res);
+  
+ res.forEach(elem=>{
+  const sfRef = doc(db, "Articles", elem.id);
+  batch.delete(sfRef);
+ })
+
+ await batch.commit();
+}
+export const deleteCategory=(docid,tag)=>async (dispatch)=>{
   console.log(docid)
   dispatch({
     type:SECTION_LOADER,
     sectionLoader:true
   })
   try{
+    // console.log(tag);
     await deleteDoc(doc(db, "Categories",docid ));
+    // await deletePostsFromArticle(tag)
     // const data=querySnapshot.data()
    dispatch(fetchCategory())
   }

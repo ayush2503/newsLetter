@@ -62,8 +62,8 @@ useEffect(() => {
   console.log(" dada",menuItems);
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed">
-        <Toolbar sx={{justifyContent:'space-between',px:"1vmax",}}>
+      <AppBar position="fixed" sx={{px:"4vmax"}}>
+        <Toolbar sx={{justifyContent:'space-between',}}>
           <div style={{display:'flex'}}>
             <Link to="/" style={{textDecoration:"none",display:"flex",alignItems:"center",marginLeft:"1vmax"}}>
           {/* <Typography

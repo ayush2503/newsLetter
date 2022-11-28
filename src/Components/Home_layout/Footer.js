@@ -9,6 +9,7 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../Config/firebase";
 import logo from "../../Assets/Logo/logo.svg"
+import { display } from "@mui/system";
 export default function Footer() {
     const [fetchContacts, setfetchContacts] = useState([])
     const params=useParams()
@@ -51,14 +52,22 @@ export default function Footer() {
 
         {fetchContacts?.map((elem)=>{
             if(elem.handleLink !== ""){
-                console.log({elem});
-                switch (elem.handle) {
-                    case "Gmail":
-                        
-                        return <a href={elem.handleLink} target="_blank">
 
-                        <MailIcon sx={{color:"white",fontSize:"1.5vmax",mr:"1vmax","&:hover":{color:"#49C5B6"}}}/>
-                        </a>;
+                console.log({elem});
+                if(elem.handle==="Carrer"){
+                  return
+                  (<Box>
+                        <Typography>Carrer</Typography>
+                  </Box>)
+
+                }
+                switch (elem.handle) {
+                    // case "Gmail":
+                        
+                    //     return <a href={elem.handleLink} target="_blank">
+
+                    //     <MailIcon sx={{color:"white",fontSize:"1.5vmax",mr:"1vmax","&:hover":{color:"#49C5B6"}}}/>
+                    //     </a>;
                     // case "PhoneNumber":
                     //         return <a href={elem.handleLink} target="_blank">
 
@@ -103,10 +112,13 @@ export default function Footer() {
             <Typography color={"white"}>About Us</Typography>
           </Link> */}
           <Link to="/tnc" style={{textDecoration:"none"}}>
-            <Typography color={"white"} sx={{fontSize:"1.1vmax",pr:"1.3vmax","&:hover":{color:"#49C5B6"}}}>Terms And Conditions</Typography>
+            <Typography color={"white"} sx={{fontSize:"1.1vmax",mr:"1.3vmax","&:hover":{color:"#49C5B6"}}}>Terms And Conditions</Typography>
           </Link>
           <Link to="/privacy_Policy" style={{textDecoration:"none"}}>
-            <Typography color={"white"} sx={{fontSize:"1.1vmax","&:hover":{color:"#49C5B6"}}}>Privacy Policy</Typography>
+            <Typography color={"white"} sx={{fontSize:"1.1vmax",mr:"1.3vmax","&:hover":{color:"#49C5B6"}}}>Privacy Policy</Typography>
+          </Link>
+          <Link to="/api/v1/admin" style={{textDecoration:"none"}}>
+            <Typography color={"white"} sx={{fontSize:"1.1vmax","&:hover":{color:"#49C5B6"}}}>Admin</Typography>
           </Link>
           
         </Box>

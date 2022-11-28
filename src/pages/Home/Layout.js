@@ -14,15 +14,16 @@ function Layout() {
       <SearchAppBar />
       <Box
         sx={{
-          px: 4,
+          px: "6.5vmax",
           mt: 5,
           display: "flex",
-          flexDirection: { xs:"column-reverse", sm: "row" },      
+          flexDirection: { xs:"column-reverse", sm: "row" }, 
+          // bgcolor:"red"     
         }}
       >
        
 
-        <Box sx={{ py: 2, minHeight: "80vh",width:{sm:"90%"} }}>
+        <Box sx={{ py: 2, minHeight: "80vh",width:{sm:"90%"}, }}>
           <Outlet />
         </Box>
         <Box

@@ -21,7 +21,7 @@ import { Paragraph } from '../../../Components/Typography';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { deleteCategory, fetchCategory } from '../../../Store/Action/AdminActions/SectionActions/sectionAction';
+import { deleteCategory, deletePostsFromArticle, fetchCategory } from '../../../Store/Action/AdminActions/SectionActions/sectionAction';
 import Loader from '../../../Components/Loader/Loader';
 const CardHeader = styled(Box)(() => ({
   display: 'flex',
@@ -78,9 +78,12 @@ const CategoryTable = () => {
   if(sectionLoader){
     return <Loader/>
   }
-  const deletehandler=(docid)=>{
-    console.log("object");
-      dispatch(deleteCategory(docid))
+  const deletehandler=(docid,tag)=>{
+    Promise.all(  dispatch(deleteCategory(docid)),  dispatch(deletePostsFromArticle(tag)))
+    // console.log("object");
+      // dispatch(deleteCategory(docid))
+     
+      // dispatch(deletePostsFromArticle(tag))
   }
   return (
 
@@ -140,9 +143,9 @@ const CategoryTable = () => {
                     <Small bgcolor={bgError}>out of stock</Small>
                   )}
                 </TableCell> */}
-
+{/* deletehandler(data.id,data.label) */}
                 <TableCell sx={{ px: 0 }} colSpan={1}>
-                  <IconButton onClick={()=>deletehandler(data.id)} aria-label="delete" size="medium">
+                  <IconButton onClick={()=> deletehandler(data.id,data.label)} aria-label="delete" size="medium">
                     <DeleteIcon  />
                   </IconButton>
                 </TableCell>
