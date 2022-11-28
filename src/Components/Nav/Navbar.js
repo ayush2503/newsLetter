@@ -76,14 +76,7 @@ useEffect(() => {
           >
             Logo
           </Typography> */}
-           {/* <CardMedia
-         component="img"
-        //  height="220vmax"
-        width={"325"}
-         image={"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png"}
-         alt=""
-         sx={{mt:2,mb:1,height:{xs:"15vmax", sm:"20vmax"}}}
-        /> */}
+      
         <img 
          src={logo} style={{width:"4vmax"}} alt="" />
             </Link>

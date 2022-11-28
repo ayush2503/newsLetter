@@ -10,7 +10,7 @@ function BodyNav({item,...props}) {
       {item?.map((elem)=> <Typography sx={{mr:3,fontSize:"1.6vmax",cursor:'pointer',textTransform:"capitalize",}}>{elem}</Typography> )}
       
     </div>
-    <Divider sx={{width:"100%",mt:"1vmax",bgcolor:"#F8FFFE"}}/>
+    <Divider sx={{width:"90%",mt:"1vmax",bgcolor:"#F8FFFE"}}/>
     </>
   )
 }
