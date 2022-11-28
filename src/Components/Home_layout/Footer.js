@@ -8,6 +8,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../Config/firebase";
+import logo from "../../Assets/Logo/logo.svg"
 export default function Footer() {
     const [fetchContacts, setfetchContacts] = useState([])
     const params=useParams()
@@ -40,9 +41,12 @@ export default function Footer() {
       }}
     >
       <div style={{ height: "80%", width: "20%" }}>
-        <Typography variant="h2" color={"#F3F3F3"} sx={{fontSize:"2.8vmax"}}>
+        {/* <Typography variant="h2" color={"#F3F3F3"} sx={{fontSize:"2.8vmax"}}>
           LOGO
-        </Typography>
+        </Typography> */}
+        <Link to="/"> 
+        <img src={logo} style={{height:"2.2vmax",marginBottom:"0.6vmax"}} alt="" />
+        </Link>
         <Typography color={"#F3F3F3"} sx={{fontSize:"1vmax"}}>Follow Us On</Typography>
 
         <Box sx={{mt:"1vmax",display:"flex",alignItems:"center"}}>
