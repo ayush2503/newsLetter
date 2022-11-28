@@ -8,10 +8,10 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
-
+import logo from "../../Assets/Logo/logo.svg"
 import { Link, useLocation, useParams } from "react-router-dom";
 import { useState } from "react";
-import { Button } from "@mui/material";
+import { Button, CardMedia } from "@mui/material";
 import SearchBox from "../SearcBox/SearchBox";
 import { useEffect } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
@@ -63,10 +63,10 @@ useEffect(() => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed">
-        <Toolbar sx={{justifyContent:'space-between',px:"1vmax"}}>
+        <Toolbar sx={{justifyContent:'space-between',px:"1vmax",}}>
           <div style={{display:'flex'}}>
-            <Link to="/" style={{textDecoration:"none"}}>
-          <Typography
+            <Link to="/" style={{textDecoration:"none",display:"flex",alignItems:"center",marginLeft:"1vmax"}}>
+          {/* <Typography
             variant="h6"
             noWrap
             component="div"
@@ -75,7 +75,17 @@ useEffect(() => {
             sx={{fontSize:"1.5vmax"}}
           >
             Logo
-          </Typography>
+          </Typography> */}
+           {/* <CardMedia
+         component="img"
+        //  height="220vmax"
+        width={"325"}
+         image={"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png"}
+         alt=""
+         sx={{mt:2,mb:1,height:{xs:"15vmax", sm:"20vmax"}}}
+        /> */}
+        <img 
+         src={logo} style={{width:"4vmax"}} alt="" />
             </Link>
           <Box  sx={{ml:"3vmax"}} style={{ display: "flex", alignItems: "center" }}>
           <Link style={{textDecoration:"none"}} to="/">
