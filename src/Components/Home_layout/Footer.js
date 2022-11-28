@@ -47,22 +47,16 @@ export default function Footer() {
         <img src={logo} style={{width:"9vmax",marginBottom:"0.5vmax",marginRight:"1vmax"}} alt="" />
         </Link>
         <Typography color={"#F3F3F3"} sx={{fontSize:"1vmax"}}>Follow Us On</Typography>
-
+       
         <Box sx={{mt:"1vmax",display:"flex",alignItems:"center"}}>
 
         {fetchContacts?.map((elem)=>{
             if(elem.handleLink !== ""){
 
                 console.log({elem});
-                if(elem.handle==="Carrer"){
-                  return
-                  (<Box>
-                        <Typography>Carrer</Typography>
-                  </Box>)
-
-                }
+             
                 switch (elem.handle) {
-                    // case "Gmail":
+                    // case "Carrer":
                         
                     //     return <a href={elem.handleLink} target="_blank">
 
@@ -92,6 +86,13 @@ export default function Footer() {
                 }}
         })}
        
+        </Box>
+        <Box>
+          {fetchContacts?.map(elem=>{
+            if(elem.handle==="Carrer"){
+              return<a> <Typography sx={{color:"white",mt:"0.2vmax",cursor:"pointer","&:hover":{color:"#49C5B6"}}}>Carrer</Typography></a>
+            }
+          })}
         </Box>
       </div>
       <div style={{ height: "60%", width: "55%",marginLeft:"1vmax" }}>
