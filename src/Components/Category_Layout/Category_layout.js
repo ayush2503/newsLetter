@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../../Config/firebase";
 import CardBox from "../Cards/CardBox";
+import Loader from "../Loader/Loader";
 
 function Category_layout(props) {
   // const {navigation,route}=props
@@ -65,9 +66,12 @@ function Category_layout(props) {
      fetch();
 
   }, [para.label]);
+  // <Box sx={{ mt: 5 }}><Typography sx={{fontSize:"1vmax"}}> Article Not Found</Typography> {LoaderState}</Box>
 
   if (LoaderState)
-    return <Box sx={{ mt: 5 }}><Typography sx={{fontSize:"1vmax"}}> Article Not Found</Typography> {LoaderState}</Box>;
+    return <Loader/>
+
+  
 
   const tabs = ["Latest", "Trending", "All"];
   return (

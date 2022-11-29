@@ -33,12 +33,14 @@ import {
   PinterestIcon
 
 } from "react-share";
+import Loader from '../../Components/Loader/Loader'
 function ArticleDetails() {
     const [data,setData]=useState({})
-    
+    const [LoaderState, setLoaderState] = useState(false);
     const params=useParams()
      useEffect(() => {
-        const getdata=async()=>{
+       const getdata=async()=>{
+          setLoaderState(true)
         const docRef = doc(db, "Articles", params.id);
         console.log(params)
         const docSnap = await getDoc(docRef);
@@ -46,20 +48,30 @@ function ArticleDetails() {
         if (docSnap.exists()) {
             console.log("Document data:", docSnap.data());
             setData(docSnap.data())
+            // setData(false)
 
           } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
-
+            
           }
+          setLoaderState(false)
         }
         getdata()
     }, [])
-if(Object.keys(data).length<= 0)
-    return <Box sx={{mt:"3vmax"}}>
-        <Typography sx={{fontSize:"1.2vmax"}}>Data not found</Typography>
-        </Box>
+
+    // if(Object.keys(data).length<= 0)
+    //     return <Box sx={{mt:"3vmax"}}>
+    if(LoaderState){
+      return <Loader/>
+    }
+    //         <Typography sx={{fontSize:"1.2vmax"}}>Data not found</Typography>
+//         </Box>
   return (
+    <>
+    {Object.keys(data).length>0?
+    
+    
     <>
     <Box sx={{bgcolor:"white",p:"1vmax",boxShadow:14,m:"2vmax",mt:"3vmax"}}>
   {      console.log(data)}
@@ -85,7 +97,7 @@ if(Object.keys(data).length<= 0)
   </PinterestShareButton>
   <Box  onClick={() =>  navigator.clipboard.writeText(window.location.href)}>
 
-<ShareRoundedIcon sx={{fontSize:"1.8vmax",cursor:"pointer"}}  />
+<ShareRoundedIcon sx={{fontSize:"1.4vmax",cursor:"pointer"}}  />
 </Box>
 
 {/* <TwitterIcon size={32} round={true} /> */}
@@ -126,6 +138,13 @@ if(Object.keys(data).length<= 0)
     
     {/* <TwitterIcon size={32} round={true} /> */}
     </Box>
+    </>
+
+    :
+    <Box sx={{mt:"3vmax"}}>
+        <Typography sx={{fontSize:"1.2vmax"}}>Data not found</Typography>
+        </Box>
+}
     </>
   )
 }
