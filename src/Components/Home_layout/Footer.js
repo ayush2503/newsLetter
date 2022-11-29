@@ -6,12 +6,14 @@ import MailIcon from '@mui/icons-material/Mail';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../Config/firebase";
 import logo from "../../Assets/Logo/logo.svg"
 import { display } from "@mui/system";
+import { async } from "@firebase/util";
 export default function Footer() {
     const [fetchContacts, setfetchContacts] = useState([])
+    const [aboutUs,setAboutas] = useState("")
     const params=useParams()
     useEffect(() => {
         // fetchContacts.length<=0 &&
@@ -26,7 +28,25 @@ export default function Footer() {
     }
     )},[params.label])
    
-    
+    const fetch=async()=>{
+      const q= query(
+          collection(db, "Privacy Policies"),
+          where("label", "==","AboutUs"),
+        
+        );
+
+
+      const ticketDocsSnap= await  getDocs(q)
+       
+        ticketDocsSnap.forEach((doc)=>{
+          console.log(doc.id, '=>', doc.data());
+          setAboutas(doc.data())  })    
+      
+  }
+  useEffect(() => {
+      fetch()
+      
+  }, [])
     
   return (
     <Box
@@ -90,18 +110,23 @@ export default function Footer() {
         <Box>
           {fetchContacts?.map(elem=>{
             if(elem.handle==="Carrer"){
-              return<a> <Typography sx={{color:"white",mt:"0.2vmax",cursor:"pointer","&:hover":{color:"#49C5B6"}}}>Carrer</Typography></a>
+              return<a  href={ elem.handleLink} target="_blank" style={{textDecoration:"none"}}> <Typography sx={{color:"white",mt:"0.2vmax",cursor:"pointer","&:hover":{color:"#49C5B6"}}}>Carrer</Typography></a>
             }
           })}
         </Box>
       </div>
       <div style={{ height: "60%", width: "55%",marginLeft:"1vmax" }}>
-        <Typography color={"white"} sx={{fontSize:"1vmax"}}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita fuga
-          iure, incidunt minus architecto saepe vitae dolore perferendis error
-          molestiae recusandae illo quisquam blanditiis ipsa eum. Ullam sed
-          quidem quisquam.
-        </Typography>
+      
+{       <Typography color={"white"} sx={{fontSize:"1vmax"}}>
+         {aboutUs.body}
+            </Typography>}
+          
+ 
+        
+          
+          
+          
+     
         <Box
           sx={{
             mt: "1vmax",

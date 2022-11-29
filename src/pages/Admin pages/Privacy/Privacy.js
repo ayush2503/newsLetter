@@ -145,9 +145,9 @@ const PrivacyTable = () => {
                     <EditIcon />
                   </IconButton>
                   </Link>
-                  <IconButton aria-label="delete" size="small" onClick={()=>deletehandler(data.id)}>
+                  {/* <IconButton aria-label="delete" size="small" onClick={()=>deletehandler(data.id)}>
                     <DeleteIcon />
-                  </IconButton>
+                  </IconButton> */}
                   
                 </TableCell>
               </TableRow>
