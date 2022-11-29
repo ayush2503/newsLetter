@@ -23,6 +23,7 @@ function CheckaCategory({ isLoggedIn, children }) {
               setcat([...cata]);
             });
             setLoaderState(false)
+            return console.log("object");
 }, [location.pathname]);
     
 if(cat.length>0 && !cat.includes(params.label.toLowerCase())){
