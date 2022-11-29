@@ -93,9 +93,9 @@ function ArticleDetails() {
 <TwitterShareButton url={window.location.href}>
   <TwitterIcon size={10}  style={{marginRight:"0.3vmax"}} round={true}/>
   </TwitterShareButton>
-<PinterestShareButton  media={data?.image} url={window.location.href}>
+{/* <PinterestShareButton  media={data?.image} url={window.location.href}>
   <PinterestIcon size={10}  style={{marginRight:"0.3vmax"}} round={true}/>
-  </PinterestShareButton>
+  </PinterestShareButton> */}
   <Box  onClick={() =>  {
     navigator.clipboard.writeText(window.location.href)
     toast.success("Copied to clipboard")
@@ -132,9 +132,9 @@ function ArticleDetails() {
     <TwitterShareButton url={window.location.href}>
       <TwitterIcon size={32} round={true}/>
       </TwitterShareButton>
-    <PinterestShareButton  media={data?.image} url={window.location.href}>
+    {/* <PinterestShareButton  media={data?.image} url={window.location.href}>
       <PinterestIcon size={32} round={true}/>
-      </PinterestShareButton>
+      </PinterestShareButton> */}
       <Box  onClick={() =>  {
         navigator.clipboard.writeText(window.location.href)
         toast.success("Copied to clipboard")
