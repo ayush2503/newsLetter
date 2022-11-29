@@ -2,7 +2,7 @@
 import { db } from "../../../../Config/firebase";
 import { collection, addDoc, Timestamp, getDocs, deleteDoc, doc, updateDoc, query, where, Firestore, writeBatch } from "firebase/firestore"; 
 import { FETCH_CATEGORIES, FETCH_POLICY, FETCH_SOCIAL_HANDLES, SECTION_LOADER } from "../../../Types/AdminType/sectionTypes";
-import { async } from "@firebase/util";
+
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 export const addCategory=(value,displayOnMenu)=>async (dispatch)=>{

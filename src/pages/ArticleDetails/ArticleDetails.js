@@ -34,6 +34,7 @@ import {
 
 } from "react-share";
 import Loader from '../../Components/Loader/Loader'
+import { toast } from 'react-toastify'
 function ArticleDetails() {
     const [data,setData]=useState({})
     const [LoaderState, setLoaderState] = useState(false);
@@ -95,7 +96,10 @@ function ArticleDetails() {
 <PinterestShareButton  media={data?.image} url={window.location.href}>
   <PinterestIcon size={10}  style={{marginRight:"0.3vmax"}} round={true}/>
   </PinterestShareButton>
-  <Box  onClick={() =>  navigator.clipboard.writeText(window.location.href)}>
+  <Box  onClick={() =>  {
+    navigator.clipboard.writeText(window.location.href)
+    toast.success("Copied to clipboard")
+    }}>
 
 <ShareRoundedIcon sx={{fontSize:"1.4vmax",cursor:"pointer"}}  />
 </Box>
@@ -131,7 +135,11 @@ function ArticleDetails() {
     <PinterestShareButton  media={data?.image} url={window.location.href}>
       <PinterestIcon size={32} round={true}/>
       </PinterestShareButton>
-      <Box  onClick={() =>  navigator.clipboard.writeText(window.location.href)}>
+      <Box  onClick={() =>  {
+        navigator.clipboard.writeText(window.location.href)
+        toast.success("Copied to clipboard")
+        
+        }}>
 
       <ShareRoundedIcon sx={{fontSize:"1.8vmax",cursor:"pointer"}}  />
       </Box>

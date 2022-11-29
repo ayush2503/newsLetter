@@ -32,6 +32,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import Tnc from "./pages/PrivacyPolicy/Tnc";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
+import CheckaCategory from "./pages/CheckCategory/CheckaCategory";
 // import SocialList from './pages/Admin pages/SocialList/SocialList';
 function App() {
   const { isAuthenticated, isnavloading } = useSelector(
@@ -61,7 +62,12 @@ function App() {
           <Route path="*" element={<Navigate to={"/404"} replace />} />
         </Route>
         <Route path={"/category"} element={<Layout />}>
-          <Route path=":label" element={<Category_layout />} />
+          <Route path=":label" element={
+          <CheckaCategory> 
+             <Category_layout />
+          </CheckaCategory>
+         
+          } />
           <Route path=":label/:id" element={<ArticleDetails />} />
         </Route>
         <Route path="/404" element={<Layout />}>
