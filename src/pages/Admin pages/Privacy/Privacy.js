@@ -88,11 +88,11 @@ const PrivacyTable = () => {
     <Card elevation={3} sx={{ pt: '20px', mb: 3 }}>
       <CardHeader>
         <Title>Privacy Policies</Title>
-        <div>
+        {/* <div>
           <Link to="add" style={{ textDecoration: 'none', width: '100%', marginBottom: "1vmax", }}>
             <Button color="success" variant="contained" sx={{ px: 3, py: 0.5 }}>Add</Button>
           </Link>
-        </div>
+        </div> */}
       </CardHeader>
 
       <Box overflow="auto">

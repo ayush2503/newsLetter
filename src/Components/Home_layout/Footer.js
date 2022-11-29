@@ -110,7 +110,7 @@ export default function Footer() {
         <Box>
           {fetchContacts?.map(elem=>{
             if(elem.handle==="Carrer"){
-              return<a  href={ elem.handleLink} target="_blank" style={{textDecoration:"none"}}> <Typography sx={{color:"white",mt:"0.2vmax",cursor:"pointer","&:hover":{color:"#49C5B6"}}}>Carrer</Typography></a>
+              return<a  href={ elem.handleLink} target="_blank" style={{textDecoration:"none"}}> <Typography sx={{color:"white",fontSize:"1vmax",mt:"0.2vmax",cursor:"pointer","&:hover":{color:"#49C5B6"}}}>Carrer</Typography></a>
             }
           })}
         </Box>
