@@ -6,6 +6,7 @@ import { Box, Button, Divider, Drawer, Typography, useMediaQuery } from '@mui/ma
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { Link } from 'react-router-dom';
 import { NavItem } from './Nav_Item';
+import logo from "../../Assets/Logo/logo.svg"
 // import { ChartBar as ChartBarIcon } from '../icons/chart-bar';
 // import { Cog as CogIcon } from '../icons/cog';
 // import { Lock as LockIcon } from '../icons/lock';
@@ -113,7 +114,11 @@ export const DashboardSidebar = (props) => {
             {/* </NextLink> */}
             <div style={{display:"flex"}}>
                 <image/>
-                <Link to='/api/v1/admin' style={{textDecoration:'none',color:"white",marginLeft:"1vmax"}}>LOGO</Link>
+                <Link to='/api/v1/admin/article' style={{textDecoration:'none',color:"white",marginLeft:"1vmax"}}>
+              <img src={logo} style={{width:"4.5vmax"}} alt="" srcset="" />
+                
+
+                </Link>
             </div>
           </Box>
           <Box sx={{ px: 2 }}>
