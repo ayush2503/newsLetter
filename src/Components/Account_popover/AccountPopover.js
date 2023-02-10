@@ -11,7 +11,7 @@ const navigate=useNavigate()
 
   const handleSignOut=()=>{
     dispatch(logoutAction(navigate))
-    navigate("/api/v1/admin")
+    navigate("/api/v1/admin/login")
   }
   return (
     <Popover

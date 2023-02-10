@@ -3,7 +3,7 @@ import { ADMIN_DETAILS, IS_ADMIN_AUTHENTICATED, NAV_LOADING } from "../../Types/
 const AdminAuthDetails={
     userDetails:{},
     isAuthenticated:false,
-    isnavloading:false
+    isnavloading:true
 }
 
 export const authDetails=(state=AdminAuthDetails,action)=>{

@@ -13,6 +13,7 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import RichTextEditor from "react-rte";
 import Loader from "../../../Components/Loader/Loader";
 import MultipleSelect from "../../../Components/MultiSelect";
 import BasicSelect from "../../../Components/SelectInput";
@@ -32,7 +33,27 @@ function AddArticle() {
   const [body, setBody] = React.useState("");
   const [img, setImg] = React.useState("");
   const [imgname, setImgName] = React.useState("");
+  const [values, setValue] = React.useState(RichTextEditor.createEmptyValue());
   const dispatch = useDispatch();
+  const toolbarConfig = {
+    // Optionally specify the groups to display (displayed in the order listed).
+    display: ['INLINE_STYLE_BUTTONS', 'BLOCK_TYPE_BUTTONS', 'LINK_BUTTONS', 'BLOCK_TYPE_DROPDOWN', 'HISTORY_BUTTONS'],
+    INLINE_STYLE_BUTTONS: [
+      {label: 'Bold', style: 'BOLD', className: 'custom-css-class'},
+      {label: 'Italic', style: 'ITALIC'},
+      {label: 'Underline', style: 'UNDERLINE'}
+    ],
+    BLOCK_TYPE_DROPDOWN: [
+      {label: 'Normal', style: 'unstyled'},
+      {label: 'Heading Large', style: 'header-one'},
+      {label: 'Heading Medium', style: 'header-two'},
+      {label: 'Heading Small', style: 'header-three'}
+    ],
+    BLOCK_TYPE_BUTTONS: [
+      {label: 'UL', style: 'unordered-list-item'},
+      {label: 'OL', style: 'ordered-list-item'}
+    ]
+  };
   useEffect(() => {
     dispatch(fetchCategory());
   }, []);
@@ -89,6 +110,7 @@ function AddArticle() {
       <Card elevation={3} sx={{ width: "100%", mt: -4, mb: 3, px: 2, py: 2 }}>
         <p>Add Article</p>
       </Card>
+     
       <Card
         elevation={3}
         sx={{
@@ -117,7 +139,7 @@ function AddArticle() {
             // style={{width:"60vw"}}
             sx={{ width: "100%", mb: 4 }}
           />
-
+{/* 
           <TextInput
             label="Article Body"
             value={body}
@@ -126,8 +148,17 @@ function AddArticle() {
             sx={{ width: "100%", mb: 4 }}
             rows={10}
             multiline
-          />
-
+          /> */}
+          <Typography>Article Body</Typography>
+ <RichTextEditor
+        value={values}
+        toolbarConfig={toolbarConfig}
+        onChange={(val)=>{
+          setValue(val)
+          console.log(val)
+        }
+        }
+      />
 {/* <TextField
           id="filled-multiline-static"
           label="Multiline"

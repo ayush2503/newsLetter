@@ -16,7 +16,7 @@ import AddSocialLinks from "./pages/Admin pages/SocialList/AddSocialLinks";
 import AddPrivacyTerms from "./pages/Admin pages/Privacy/AddPrivacyTerms";
 import AddArticle from "./pages/Admin pages/Article/AddArticle";
 import { useDispatch, useSelector } from "react-redux";
-import { check } from "./Store/Action/AdminActions/AuthActions/AuthActions";
+import { check, checkAuth } from "./Store/Action/AdminActions/AuthActions/AuthActions";
 import Loader from "./Components/Loader/Loader";
 import EditPrivacyTerms from "./pages/Admin pages/Privacy/editPrivacy";
 import { ToastContainer } from "react-toastify";
@@ -33,16 +33,50 @@ import SearchPage from "./pages/SearchPage/SearchPage";
 import Tnc from "./pages/PrivacyPolicy/Tnc";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import CheckaCategory from "./pages/CheckCategory/CheckaCategory";
+import { useState } from "react";
+import RequireAuth from "./Components/RequireAuth";
 // import SocialList from './pages/Admin pages/SocialList/SocialList';
 function App() {
   const { isAuthenticated, isnavloading } = useSelector(
     (state) => state.adminAuth
   );
+  const [authState, setauthState] = useState(null)
+  const dispatch=useDispatch()
+  // const [loading,setIsloading]=useState(true)
+  // useEffect(() => {
+  //  setIsloading(true)
+  //  try {
+  //   const loggedInUser = localStorage.getItem("isAuthenticated");
+  //   if(loggedInUser){
+  //     const foundUser = JSON.parse(loggedInUser)
+  //     console.log("here it is",foundUser)
+  //     setauthState(foundUser)
+  //     setIsloading(false)
+  //   }
+  //   else{
+  //     console.log("elese part");
+  //     setauthState(isAuthenticated)
+  //     setIsloading(false)
+  //   }
+  //  } catch (error) {
+  //   console.log("eerr")
+  //   setIsloading(false)
+  //  }
+  // }, [])
+  
 
+  //  if(loading){
+  //   return <div>Spineer....</div>
+  //  }
+  //  if(loading){
+  //   return <div>Spineer....</div>
+  //  }
   return (
+    
     // <MiniDrawer/>
     // <div>app</div>
     <ThemeProvider theme={theme}>
+      {console.log("render",authState)}
       {/* {console.log("reder")} */}
 
       <Routes>
@@ -74,91 +108,100 @@ function App() {
           <Route index element={<PageNotFound/>} />
         </Route>
 
-        {/* <Route path="/login"element={<Login/>} /> */}
+        {/* <Route  path="/login"element={<Login/>} /> */}
+
         <Route path="/api/v1/admin/login" element={<Login />} />
+      
         <Route
-          path="/api/v1/admin"
+          // path="/api/v1/admin"
           element={
-            <Protected isLoggedIn={isAuthenticated}>
-              <Admin />
-            </Protected>
+            <Protected />
+            
           }
           // !isAuthenticated ? <Login /> : <Admin />}
         >
-          <Route path="category" element={<Outlet />}>
-            <Route
-              index
-              element={
-                <Protected isLoggedIn={isAuthenticated}>
-                  <CategoryTable />
-                </Protected>
-              }
-            />
+          <Route path="/api/v1/admin"  element={<Admin/>}>
+            <Route element={  <RequireAuth  isLoggedIn={isAuthenticated}/>}>
+              <Route path="category" element={<Outlet />}>
+                <Route
+                  index
+                  element={
+                  
+                      <CategoryTable />
+                  
+                  }
+                />
 
-            <Route
-              path="add"
-              element={
-                <Protected isLoggedIn={isAuthenticated}>
-                  <AddCategory />
-                </Protected>
-              }
-            />
-          </Route>
-          <Route path="contacts" element={<Outlet />}>
-            <Route
-              index
-              element={
-                <Protected isLoggedIn={isAuthenticated}>
-                  <SocialList />
-                </Protected>
-              }
-            />
+                <Route
+                  path="add"
+                  element={
+                  
+                      <AddCategory />
+                    
+                  }
+                />
+              </Route>
+            </Route>
+            <Route element={  <RequireAuth   isLoggedIn={isAuthenticated}/>}>
+            <Route path="contacts" element={<Outlet />}>
+              <Route
+                index
+                element={
+                  // <Protected isLoggedIn={isAuthenticated}>
+                    <SocialList />
+                  // </Protected>
+                }
+              />
 
+              <Route
+                path="add"
+                element={
+                  // <Protected isLoggedIn={isAuthenticated}>
+                    <AddSocialLinks />
+                  // </Protected>
+                }
+              />
+            </Route>
+            </Route>
+            <Route element={  <RequireAuth  isLoggedIn={isAuthenticated}/>}>
             <Route
-              path="add"
+              path="article"
               element={
-                <Protected isLoggedIn={isAuthenticated}>
-                  <AddSocialLinks />
-                </Protected>
+              
+                    <AddArticle />
+               
               }
             />
-          </Route>
-          <Route
-            path="article"
-            element={
-              <Protected isLoggedIn={isAuthenticated}>
-                <Protected isLoggedIn={isAuthenticated}>
-                  <AddArticle />
-                </Protected>
-              </Protected>
-            }
-          />
-          <Route path="privacy" element={<Outlet />}>
-            <Route
-              index
-              element={
-                <Protected isLoggedIn={isAuthenticated}>
-                  <PrivacyTable />
-                </Protected>
-              }
-            />
+            </Route>
+            <Route element={  <RequireAuth   isLoggedIn={isAuthenticated}/>}>
+            <Route path="privacy" element={<Outlet />}>
+              <Route
+                index
+                element={
+                  // <Protected isLoggedIn={isAuthenticated}>
+                    <PrivacyTable />
+                  // </Protected>
+                }
+              />
 
-            <Route
-              path="edit/:id"
-              element={
-                <Protected isLoggedIn={isAuthenticated}>
-                  <EditPrivacyTerms />
-                </Protected>
-              }
-            />
-            <Route
-              path="add"
-              element={
-                <Protected isLoggedIn={isAuthenticated}>
-                  <AddPrivacyTerms />
-                </Protected>
-              }
-            />
+              <Route
+                path="edit/:id"
+                element={
+                  // <Protected isLoggedIn={isAuthenticated}>
+                    <EditPrivacyTerms />
+                  // </Protected>
+                }
+              />
+              <Route
+                path="add"
+                element={
+                  // <Protected isLoggedIn={isAuthenticated}>
+                    <AddPrivacyTerms />
+                  // </Protected>
+                }
+              />
+            </Route>
+            </Route>     
           </Route>
         </Route>
       </Routes>

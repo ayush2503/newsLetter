@@ -5,41 +5,83 @@ import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // const auth = getAuth();
-export const check=()=>dispatch=>{
-    const user = auth.currentUser;
-    dispatch({
-      type:NAV_LOADING,
-      isnavloading:true
-    })
-    console.log("in check")
-    if(user){
-        dispatch({
-            type:ADMIN_DETAILS,
-            userDetails:user
-          })
-          dispatch({
-            type:IS_ADMIN_AUTHENTICATED,
-            ifAuthenticated:true
-          })
-          
+export const check=(stopLoad)=>dispatch=>{
+  console.log("in check")
+  dispatch({
+    type:NAV_LOADING,
+    isnavloading:true
+  })
+    const loggedInUser = localStorage.getItem("isAuthenticated");
+    console.log("check bc",loggedInUser)
+    try{
+    if(loggedInUser){
+      const foundUser = JSON.parse(loggedInUser)
+      console.log("here it is",foundUser)
+      // setauthState(foundUser)
+      // setIsloading(false)
+      dispatch({
+        type:IS_ADMIN_AUTHENTICATED,
+        ifAuthenticated:foundUser
+      })
     }
     else{
-        dispatch({
-            type:ADMIN_DETAILS,
-            userDetails:{}
-          })
-          dispatch({
-            type:IS_ADMIN_AUTHENTICATED,
-            ifAuthenticated:false
-          })
+      console.log("elese part");
+    
+      dispatch({
+        type:IS_ADMIN_AUTHENTICATED,
+        ifAuthenticated:false
+      })
     }
+   } catch (error) {
+    console.log("eerr")
+   
+    dispatch({
+      type:IS_ADMIN_AUTHENTICATED,
+      ifAuthenticated:false
+    })
+   }
+   finally{
+    stopLoad(false)
+   }
+ 
+   
+    
+  
+  
+        // dispatch({
+        //     type:ADMIN_DETAILS,
+        //     userDetails:{}
+        //   })
+        
+    
     dispatch({
       type:NAV_LOADING,
       isnavloading:false
     })
 }
+export const checkAuth = ()=>dispatch=>{
+  dispatch({
+    type:NAV_LOADING,
+    isnavloading:true
+  })
+  console.log("hereabc")
+  const res= localStorage.getItem("isAuthenticated")
+  console.log("checkAuth",res);
+  dispatch({
+    type:IS_ADMIN_AUTHENTICATED,
+    ifAuthenticated:true
+  })
+  dispatch({
+    type:NAV_LOADING,
+    isnavloading:false
+  })
+}
 export const loginAction=(payload,navigate)=>dispatch=>{
     console.log("here")
+    dispatch({
+      type: NAV_LOADING,
+      isnavloading:true
+    })
     // createUserWithEmailAndPassword(auth, "admin1234@gmail.com", "admin)(*&")
     // .then((userCredential) => {
     //   // Signed in 
@@ -70,12 +112,17 @@ export const loginAction=(payload,navigate)=>dispatch=>{
         type:ADMIN_DETAILS,
         userDetails:user
       })
+      localStorage.setItem('isAuthenticated',  JSON.stringify(true));
       dispatch({
         type:IS_ADMIN_AUTHENTICATED,
         ifAuthenticated:true
       })
       toast.success("Successfully Logged In !!")
-    navigate("/api/v1/admin/article")
+    navigate("/api/v1/admin/article",{replace:true})
+    dispatch({
+      type: NAV_LOADING,
+      isnavloading:false
+    })
       
   })
   .catch((error) => {
@@ -98,6 +145,7 @@ export const logoutAction=()=>dispatch=>{
             type:IS_ADMIN_AUTHENTICATED,
             ifAuthenticated:false
           })
+          localStorage.setItem('isAuthenticated',  JSON.stringify(false));
           // console.log("logout action")
           toast.success("Successfully Logged Out !!")
          

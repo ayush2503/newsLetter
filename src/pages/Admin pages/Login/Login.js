@@ -11,10 +11,10 @@ function Login() {
     const dispatch=useDispatch()
     const navigate= useNavigate()
 const handleEmailChange=(val)=>{
-    setemail(val)
+    setemail("admin1234@gmail.com")
 }
 const handlePassChange=(val)=>{
-    setpassword(val)
+    setpassword("admin)(*&")
 }
 const handleLogin=()=>{
     if(!email && !password)
