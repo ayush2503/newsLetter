@@ -120,9 +120,9 @@ function App() {
           }
           // !isAuthenticated ? <Login /> : <Admin />}
         >
-          <Route path="/api/v1/admin"  element={<Admin/>}>
+          <Route element={<Admin/>}>
             <Route element={  <RequireAuth  isLoggedIn={isAuthenticated}/>}>
-              <Route path="category" element={<Outlet />}>
+              <Route path="/api/v1/admin/category" element={<Outlet />}>
                 <Route
                   index
                   element={
@@ -143,7 +143,7 @@ function App() {
               </Route>
             </Route>
             <Route element={  <RequireAuth   isLoggedIn={isAuthenticated}/>}>
-            <Route path="contacts" element={<Outlet />}>
+            <Route  path="/api/v1/admin/contacts" element={<Outlet />}>
               <Route
                 index
                 element={
@@ -165,7 +165,7 @@ function App() {
             </Route>
             <Route element={  <RequireAuth  isLoggedIn={isAuthenticated}/>}>
             <Route
-              path="article"
+              path="/api/v1/admin/article"
               element={
               
                     <AddArticle />
@@ -174,7 +174,7 @@ function App() {
             />
             </Route>
             <Route element={  <RequireAuth   isLoggedIn={isAuthenticated}/>}>
-            <Route path="privacy" element={<Outlet />}>
+            <Route path="/api/v1/admin/privacy" element={<Outlet />}>
               <Route
                 index
                 element={

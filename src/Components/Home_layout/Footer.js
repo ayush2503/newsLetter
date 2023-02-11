@@ -143,7 +143,7 @@ export default function Footer() {
           <Link to="/privacy_Policy" style={{textDecoration:"none"}}>
             <Typography color={"white"} sx={{fontSize:"1.1vmax",mr:"1.3vmax","&:hover":{color:"#49C5B6"}}}>Privacy Policy</Typography>
           </Link>
-          <Link to="/api/v1/admin" style={{textDecoration:"none"}}>
+          <Link to="/api/v1/admin/login" style={{textDecoration:"none"}}>
             <Typography color={"white"} sx={{fontSize:"1.1vmax","&:hover":{color:"#49C5B6"}}}>Admin</Typography>
           </Link>
           

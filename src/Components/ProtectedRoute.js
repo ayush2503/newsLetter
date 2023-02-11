@@ -47,7 +47,7 @@ dispatch(check(setIsLoading))
     // isLoggedIn ? 
     // <Outlet/>:
     // <Navigate to="/api/v1/admin/login"   state={{ from: location }} replace/>
-    isLoading? <p>Loadin...</p>:<Outlet/>
+    isLoading? <p>Loading...</p>:<Outlet/>
   )
 }
 

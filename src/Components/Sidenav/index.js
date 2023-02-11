@@ -24,17 +24,17 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import PrivacyTipIcon from '@mui/icons-material/PrivacyTip';
 const items = [
   {
-    path: 'article',
+    path: '/api/v1/admin/article',
     icon: (<ArticleIcon fontSize="small" />),
     title: 'Article'
   },
   {
-    path: 'category',
+    path: '/api/v1/admin/category',
     icon: (<CategoryIcon fontSize="small" color='white' />),
     title: 'Category'
   },
   {
-    path: 'contacts',
+    path: '/api/v1/admin/contacts',
     icon: (<LocalPhoneIcon fontSize="small" />),
     title: 'Contacts'
   },
@@ -44,7 +44,7 @@ const items = [
   //   title: 'Account'
   // },
   {
-    path: 'privacy',
+    path: '/api/v1/admin/privacy',
     icon: (<PrivacyTipIcon fontSize="small" />),
     title: 'Privacy'
   },
